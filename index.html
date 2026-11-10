@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPNOTEC PC | VIP Member Preview</title>
+<meta name="description" content="IPNOTEC PC — VIP member preview. Enter an IPNOTEC ID to emulate the Address Book, Spend Dashboard, Dream Machine, Astrology and Events included in the ₹1,001/month membership.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#EDEDED;--ac-rgb:237,237,237;--act:#FFFFFF;--on:#000;--bg:#050505;--txt:#F2F2F2;--mut:rgba(255,255,255,.74);--dim:rgba(255,255,255,.52);--bad:#FF7A7A;--good:#4BE07A;--warn:#FFD600;--card:rgba(255,255,255,.035);--line:rgba(var(--ac-rgb),.25);--line2:rgba(255,255,255,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+html{font-size:16px}
+body{font-family:'Rajdhani',sans-serif;font-weight:500;font-size:1.05rem;line-height:1.45;background:var(--bg);color:var(--txt);overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;text-align:inherit}
+input,select,textarea{font:inherit}
+b{font-weight:700}
+:focus-visible{outline:2px solid var(--act);outline-offset:2px}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:rgba(var(--ac-rgb),.45);border-radius:3px}::-webkit-scrollbar-track{background:transparent}
+[hidden]{display:none!important}
+/* ---------- frame ---------- */
+.wallpaper{position:relative;width:100%;height:100vh;height:100dvh;background:radial-gradient(ellipse at 50% 40%,rgba(var(--ac-rgb),.10),#000 70%);display:flex;justify-content:center;align-items:center;overflow:hidden;transition:background .8s}
+.gridbg{position:absolute;inset:0;background-image:linear-gradient(rgba(var(--ac-rgb),.05) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--ac-rgb),.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.scan{position:absolute;left:12%;width:76%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--ac-rgb),.45),transparent);animation:scan 12s linear infinite;opacity:.5;pointer-events:none}
+@keyframes scan{0%{top:0;opacity:0}40%{opacity:.6}100%{top:100%;opacity:0}}
+.pc{position:relative;width:97%;max-width:1500px;height:95vh;height:95dvh;background:#0b0b0b;border:1.5px solid var(--ac);border-radius:10px;box-shadow:0 0 50px rgba(var(--ac-rgb),.14);display:flex;flex-direction:column;overflow:hidden;transition:border-color .8s,box-shadow .8s}
+body.mono .pc{filter:grayscale(1)}
+.screen{flex:1;min-height:0;margin:8px 10px 0;background:#000;border:1px solid rgba(var(--ac-rgb),.14);border-radius:5px;position:relative;overflow:hidden}
+.layer{position:absolute;inset:0}
+.pcf{height:32px;flex:none;padding:0 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;font:600 .66rem Orbitron,sans-serif;letter-spacing:2px}
+.pcf .b{color:var(--act);opacity:.85;white-space:nowrap}.pcf .m{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pw{width:24px;height:24px;flex:none;border-radius:50%;border:1.5px solid var(--good);color:var(--good);font-size:.75rem;box-shadow:0 0 8px rgba(75,224,122,.35);text-align:center}
+/* ---------- common ui ---------- */
+.st{font:700 .8rem Orbitron,sans-serif;letter-spacing:2px;color:var(--act);margin-bottom:8px;text-transform:uppercase}
+.sub{color:var(--mut);font-size:1rem}
+.small{font-size:.92rem}
+.hint{color:var(--dim);font-size:.92rem;margin-top:4px}
+.lab{display:block;font:600 .75rem Orbitron,sans-serif;letter-spacing:1.5px;color:var(--act);margin:14px 0 6px}
+input,select,textarea{width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.22);border-radius:4px;color:#fff;font-size:1.02rem}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--act);background:rgba(var(--ac-rgb),.06)}
+textarea{resize:vertical;min-height:120px;line-height:1.45}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;background:var(--ac);color:var(--on);border:1px solid var(--ac);border-radius:4px;font:700 .75rem Orbitron,sans-serif;letter-spacing:1.5px;transition:filter .2s,transform .2s;text-align:center}
+.btn:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.g{background:transparent;color:var(--txt);border-color:rgba(255,255,255,.28)}
+.btn.g:hover:not(:disabled){border-color:var(--act);color:var(--act)}
+.btn.d{background:transparent;color:var(--bad);border-color:rgba(255,122,122,.5)}
+.btn.sm{padding:6px 11px;font-size:.72rem}
+.btn.wide{width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid rgba(255,255,255,.2);border-radius:20px;font-size:.98rem;color:var(--mut);background:rgba(255,255,255,.03);transition:.15s}
+.chip:hover{border-color:var(--act);color:#fff}
+.chip[aria-pressed=true]{border-color:var(--act);color:var(--act);background:rgba(var(--ac-rgb),.13)}
+.chip.k{cursor:default;border-color:rgba(var(--ac-rgb),.45);color:var(--act)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.card{background:var(--card);border:1px solid var(--line2);border-radius:8px;padding:16px;margin-bottom:14px}
+.card.hl{border-color:rgba(var(--ac-rgb),.55);background:rgba(var(--ac-rgb),.06)}
+.split{display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:start}
+.side{position:sticky;top:0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.kpi{padding:12px 14px;border:1px solid var(--line2);border-radius:8px;background:var(--card);min-width:0}
+.kpi span{display:block;font:600 .72rem Orbitron,sans-serif;letter-spacing:1.2px;color:var(--dim)}
+.kpi b{display:block;font:700 1.45rem Orbitron,sans-serif;color:var(--act);margin:6px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi b small{font-size:.6em;opacity:.6}
+.kpi>small{color:var(--mut);font-size:.92rem}
+.up{color:var(--bad)!important}.down{color:var(--good)!important}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:3px;border:1px solid var(--c,rgba(var(--ac-rgb),.5));color:var(--c,var(--act));font:600 .7rem Orbitron,sans-serif;letter-spacing:1px;white-space:nowrap}
+.badge.on{--c:var(--good)}.badge.off{--c:rgba(255,255,255,.45)}.badge.mute{--c:rgba(255,255,255,.4)}.badge.sim{--c:var(--warn)}
+.note{font-size:.95rem;color:var(--mut);border-left:3px solid var(--warn);padding:6px 12px;margin:12px 0;line-height:1.45;background:rgba(255,214,0,.04)}
+.kv{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:1.02rem}
+.kv span:first-child{color:var(--mut)}.kv b{text-align:right}
+.tbl{width:100%;border-collapse:collapse;font-size:1rem}
+.tbl th{position:sticky;top:0;background:#101010;color:var(--act);font:600 .7rem Orbitron,sans-serif;letter-spacing:1px;padding:10px;text-align:left;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+.tscroll{max-height:380px;overflow:auto;border:1px solid var(--line2);border-radius:8px}
+.seg{display:inline-flex;border:1px solid rgba(var(--ac-rgb),.45);border-radius:4px;overflow:hidden}
+.seg button{padding:8px 14px;font:700 .7rem Orbitron,sans-serif;letter-spacing:1px;color:var(--mut)}
+.seg button[aria-pressed=true]{background:var(--ac);color:var(--on)}
+.subtabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.subtabs button{padding:9px 16px;border:1px solid rgba(255,255,255,.18);border-radius:4px;font:600 .74rem Orbitron,sans-serif;letter-spacing:1.5px;color:var(--mut)}
+.subtabs button[aria-pressed=true]{border-color:var(--act);color:var(--act);background:rgba(var(--ac-rgb),.1)}
+.sw{width:14px;height:14px;border-radius:3px;display:inline-block;flex:none;border:1px solid rgba(255,255,255,.4)}
+.discl{font-size:.95rem;color:var(--mut);line-height:1.5;border:1px dashed rgba(255,255,255,.22);padding:12px 14px;border-radius:6px;margin-top:6px}
+.empty{padding:28px;text-align:center;color:var(--dim)}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--mut)}
+/* ---------- boot ---------- */
+#boot{background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:70;cursor:pointer}
+.bl{font:900 2.4rem Orbitron,sans-serif;color:var(--act);letter-spacing:6px;text-align:center;text-shadow:0 0 22px rgba(var(--ac-rgb),.45)}
+.bl small{display:block;font-size:.8rem;letter-spacing:5px;opacity:.7;margin-top:8px;font-weight:600}
+.bb{width:min(420px,70%);height:3px;background:rgba(255,255,255,.08);margin-top:24px;border-radius:2px;overflow:hidden}.bb i{display:block;height:100%;width:0;background:var(--ac);transition:width .3s}
+.bs{margin-top:12px;font:.95rem 'Courier New',monospace;color:var(--mut)}
+/* ---------- login ---------- */
+#login{z-index:60;overflow-y:auto;padding:28px 16px;display:flex;justify-content:center;align-items:flex-start;background:radial-gradient(ellipse at 50% 25%,rgba(255,255,255,.06),#000 70%)}
+.lg{width:100%;max-width:680px;text-align:center;margin:auto 0}
+.lg h1{font:900 clamp(2.1rem,6vw,3.6rem) Orbitron,sans-serif;letter-spacing:10px;color:#fff;text-shadow:0 0 30px rgba(255,255,255,.25)}
+.lg .k{font:600 .8rem Orbitron,sans-serif;letter-spacing:5px;color:var(--mut);margin-top:6px}
+.idbox{margin-top:26px;text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:22px}
+.idin{padding:16px;font:700 clamp(1.1rem,3.4vw,1.65rem) Orbitron,sans-serif;letter-spacing:4px;text-align:center;background:#000;border:1.5px solid rgba(255,255,255,.32);border-radius:6px;color:#fff}
+.idin::placeholder{color:rgba(255,255,255,.25)}
+.idin:focus{border-color:#fff;box-shadow:0 0 18px rgba(255,255,255,.16);background:#000}
+.idin.bad{border-color:var(--bad)}
+.segs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.seg3{padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:6px;min-height:74px}
+.seg3 .h{font:600 .7rem Orbitron,sans-serif;letter-spacing:2px;color:var(--dim)}
+.seg3 .v{margin-top:5px;font-weight:600;font-size:1rem;display:flex;gap:7px;align-items:center;line-height:1.25}
+.seg3.ok{border-color:rgba(75,224,122,.55)}.seg3.ok .h{color:var(--good)}
+.seg3.bad{border-color:rgba(255,122,122,.6)}.seg3.bad .h{color:var(--bad)}
+.err{margin-top:12px;color:var(--bad);font-size:1.02rem;min-height:1.45em}
+.lg .lab{color:#fff}
+.leg{margin-top:18px;text-align:left}
+.leg summary{cursor:pointer;font:600 .75rem Orbitron,sans-serif;letter-spacing:2px;color:var(--mut)}
+.pl{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:12px}
+.pl div{display:flex;gap:10px;align-items:center;font-size:.98rem;color:var(--mut)}
+.pl b{font:700 .78rem Orbitron,sans-serif;color:#fff;letter-spacing:1px;width:36px}
+.legfmt{margin-top:10px;font-size:.98rem;color:var(--mut)}
+.legfmt code{font-family:'Courier New',monospace;color:#fff}
+/* ---------- auth ---------- */
+#auth{z-index:65;background:#000;display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
+#auth.run .aw{animation:colourin 7s linear both}
+@keyframes colourin{from{filter:grayscale(1)}to{filter:grayscale(0)}}
+.aw{width:100%;max-width:820px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:30px;align-items:center}
+.ring{position:relative;width:200px;height:200px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:900 2.1rem Orbitron,sans-serif;color:var(--act)}
+.ring .pct small{font:600 .72rem Orbitron,sans-serif;letter-spacing:2px;color:var(--mut);margin-top:4px}
+.aid{font:900 clamp(1.25rem,3.4vw,2rem) Orbitron,sans-serif;letter-spacing:4px;color:var(--act);text-shadow:0 0 20px rgba(var(--ac-rgb),.5);word-break:break-all}
+.alog{margin-top:14px;font:1rem 'Courier New',monospace;line-height:1.8;color:var(--mut);min-height:18em}
+.alog div{white-space:pre-wrap;animation:fadein .3s both}
+.alog em{color:var(--good);font-style:normal}.alog b{color:var(--act);font-weight:400}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}}
+/* ---------- desktop ---------- */
+#desk{bottom:48px;overflow-y:auto;padding:22px 3vw 28px;background:radial-gradient(ellipse at 50% 15%,rgba(var(--ac-rgb),.08),rgba(0,0,0,.97) 70%)}
+.dw{max-width:1180px;margin:0 auto}
+.top{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;justify-content:space-between;margin-bottom:18px}
+.logo h1{font:900 clamp(1.9rem,4vw,3.1rem) Orbitron,sans-serif;letter-spacing:8px;color:var(--act);text-shadow:0 0 30px rgba(var(--ac-rgb),.4);animation:pulse 4s infinite alternate}
+.logo h1 span{font-size:.45em;letter-spacing:5px;color:#fff;margin-left:8px}
+.logo .tag{font:600 .78rem Orbitron,sans-serif;letter-spacing:4px;color:var(--mut);margin-top:4px}
+@keyframes pulse{to{text-shadow:0 0 55px rgba(var(--ac-rgb),.7)}}
+.who{text-align:right}
+.who .hi{font-size:1.3rem;font-weight:600}
+.who .idl{font:700 1rem Orbitron,sans-serif;letter-spacing:3px;color:var(--act);margin:2px 0 8px}
+.pchip{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border:1px solid var(--line);border-radius:20px;font:600 .72rem Orbitron,sans-serif;letter-spacing:1.2px;color:var(--act)}
+.hero{display:flex;gap:18px;align-items:center;width:100%;padding:20px 22px;margin-bottom:14px;background:linear-gradient(135deg,rgba(var(--ac-rgb),.16),rgba(var(--ac-rgb),.04));border:1.5px solid var(--ac);border-radius:10px;box-shadow:0 0 28px rgba(var(--ac-rgb),.12);transition:.25s}
+.hero:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(var(--ac-rgb),.28)}
+.hero.on{animation:glow 1.6s infinite alternate}
+@keyframes glow{to{box-shadow:0 0 60px rgba(var(--ac-rgb),.55)}}
+.hic{font-size:2.6rem;flex:none}
+.hx{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.ht{font:700 .95rem Orbitron,sans-serif;letter-spacing:2.5px;color:var(--act)}
+.hb{font-size:1.2rem;font-weight:600}
+.hb b{color:var(--act)}
+.hs{color:var(--mut)}
+.hcd{flex:none;text-align:center;padding:10px 16px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.4);min-width:110px}
+.hcd b{display:block;font:900 2rem Orbitron,sans-serif;color:var(--act)}
+.hcd small{font:600 .68rem Orbitron,sans-serif;letter-spacing:1.5px;color:var(--mut)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:14px}
+.tile{display:flex;flex-direction:column;gap:4px;padding:16px;background:var(--card);border:1px solid var(--line2);border-radius:8px;transition:.2s}
+.tile:hover{border-color:var(--act);background:rgba(var(--ac-rgb),.08);transform:translateY(-2px)}
+.tile .th{display:flex;align-items:center;gap:10px;font:700 .78rem Orbitron,sans-serif;letter-spacing:2px;color:var(--act)}
+.tile .th i{font-style:normal;font-size:1.3rem}
+.tile .tb{font:700 1.35rem Orbitron,sans-serif;color:#fff;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile small{color:var(--mut);font-size:.98rem;line-height:1.35}
+.bl6{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.bn{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line2);border-radius:6px;background:rgba(0,0,0,.3)}
+.bn:hover{border-color:var(--act)}
+.bn>span{font-weight:700;color:var(--dim);font-size:1.1rem;line-height:1.2}
+.bn.ok>span{color:var(--good)}
+.bn b{display:block;font-size:1.02rem}.bn small{display:block;color:var(--mut);font-size:.92rem}
+.term{background:rgba(4,4,4,.95);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.term .tt{padding:7px 12px;border-bottom:1px solid var(--line2);display:flex;gap:6px;align-items:center;background:rgba(var(--ac-rgb),.04)}
+.term .tt i{width:10px;height:10px;border-radius:50%}
+.term .tt span{flex:1;text-align:center;font:600 .7rem Orbitron,sans-serif;letter-spacing:2px;color:var(--act)}
+.term pre{padding:12px 16px;font:.95rem 'Courier New',monospace;line-height:1.7;color:var(--mut);white-space:pre-wrap}
+.term pre b{color:var(--act);font-weight:400}.term pre em{color:var(--good);font-style:normal}
+.url{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;font:600 .68rem Orbitron,sans-serif;letter-spacing:3px;color:var(--dim)}
+/* ---------- dock ---------- */
+.dock{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;justify-content:flex-start;align-items:center;gap:4px;background:rgba(0,0,0,.95);border-top:1px solid var(--line2);padding:0 8px;z-index:50;overflow-x:auto}
+.dock>:first-child{margin-left:auto}.dock>:last-child{margin-right:auto}
+.tab{flex:none;position:relative;padding:8px 14px;border:1px solid transparent;border-radius:4px;font:600 .72rem Orbitron,sans-serif;letter-spacing:1.2px;color:var(--mut)}
+.tab:hover{color:#fff;border-color:var(--line)}
+.tab.act{color:var(--act);background:rgba(var(--ac-rgb),.12);border-color:rgba(var(--ac-rgb),.4)}
+.tab.rem::after{content:"";position:absolute;top:4px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--act)}
+.tab.out{color:var(--dim);margin-left:10px}
+/* ---------- window ---------- */
+#win{inset:8px 8px 56px 8px;background:#060606;border:1px solid var(--ac);border-radius:8px;box-shadow:0 0 30px rgba(var(--ac-rgb),.12);z-index:40;display:flex;flex-direction:column;overflow:hidden}
+.wh{height:48px;flex:none;display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.wh h2{flex:1;font:700 .85rem Orbitron,sans-serif;letter-spacing:3px;color:var(--act);outline:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wh .x{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.25);color:var(--mut);font-size:1rem;text-align:center;flex:none}
+.wh .x:hover{border-color:var(--bad);color:var(--bad)}
+.wh .idt{font:600 .7rem Orbitron,sans-serif;letter-spacing:2px;color:var(--dim);white-space:nowrap}
+.wbody{flex:1;overflow-y:auto;padding:18px 20px}
+.status{flex:none;min-height:32px;padding:6px 16px;font-size:1rem;color:var(--act);border-top:1px solid var(--line2);background:rgba(0,0,0,.6)}
+/* ---------- address book ---------- */
+.bday{text-align:center;border:1.5px solid var(--ac);background:linear-gradient(180deg,rgba(var(--ac-rgb),.14),rgba(var(--ac-rgb),.03))}
+.bday.on{animation:glow 1.6s infinite alternate}
+.bday .cake{font-size:2.6rem}
+.bday .big{font-size:1.35rem;font-weight:700;margin:4px 0}
+.bday .bdate{font:900 1.35rem Orbitron,sans-serif;color:var(--act);letter-spacing:2px;margin:6px 0}
+.bday .cd{font:700 1.05rem Orbitron,sans-serif;letter-spacing:1px;padding:10px;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.45);margin:10px 0}
+.steps{padding-left:20px;color:var(--mut)}.steps li{margin:5px 0}.steps b{color:#fff}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tools input{max-width:300px}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:12px}
+.cc{position:relative;padding:12px 14px;border-radius:7px;border:1px solid var(--line2);background:var(--card)}
+.cc.p1{border-color:rgba(var(--ac-rgb),.55);background:rgba(var(--ac-rgb),.08)}
+.cc.p2{border-color:rgba(255,255,255,.22)}
+.cc b{display:block;padding-right:40px;font-size:1.06rem}
+.cc small{display:block;color:var(--mut);font-size:.95rem;margin-top:2px;word-break:break-all}
+.cc .pb{position:absolute;top:10px;right:10px;padding:1px 7px;border-radius:3px;font:700 .68rem Orbitron,sans-serif;background:rgba(255,255,255,.12)}
+.cc.p1 .pb{background:var(--ac);color:var(--on)}.cc.p2 .pb{background:#9B9B9B;color:#000}
+.cc .ct{display:inline-block;margin-top:6px;font-size:.85rem;padding:1px 8px;border-radius:3px;background:rgba(255,255,255,.07);color:var(--mut);text-transform:capitalize}
+.frz{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:rgba(var(--ac-rgb),.05);color:var(--mut)}
+/* ceremony */
+.cev{max-width:900px;margin:0 auto;text-align:center}
+.seal{position:relative;width:160px;height:160px;margin:26px auto 14px}
+.seal .rg{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:var(--ac);border-bottom-color:#fff;animation:spin 2.4s linear infinite;box-shadow:0 0 40px rgba(var(--ac-rgb),.4)}
+.seal .sg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 3rem Orbitron,sans-serif;color:var(--act)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cer-t{font:700 1.05rem Orbitron,sans-serif;letter-spacing:4px;color:var(--act)}
+.grp{margin:14px 0;padding:14px;border:1px solid var(--c);border-radius:8px;text-align:left;background:rgba(255,255,255,.02);animation:unfold .7s ease-out both;animation-delay:var(--d)}
+.grp h3{font:700 .78rem Orbitron,sans-serif;letter-spacing:2px;color:var(--c)}
+.nm{display:inline-block;margin:8px 8px 0 0;padding:7px 12px;border:1px solid var(--c);border-radius:4px;animation:nm .5s ease-out both;animation-delay:var(--d)}
+.nm small{color:var(--mut);margin-left:6px}
+@keyframes unfold{from{opacity:0;transform:scaleY(.2);transform-origin:top}to{opacity:1;transform:none}}
+@keyframes nm{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:none}}
+.cev.static *{animation:none!important}.cev.hold .acts{visibility:hidden}
+/* ---------- spend ---------- */
+.gr2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px}
+.dwrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.dpie{position:relative;width:180px;height:180px;flex:none}
+.dpie svg{width:100%;height:100%}
+.dpie .dc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 38px}
+.dpie .dc b{font:700 1rem Orbitron,sans-serif;color:#fff;word-break:break-all}
+.dpie .dc small{font:600 .66rem Orbitron,sans-serif;letter-spacing:1.5px;color:var(--dim)}
+.leg2{flex:1;min-width:200px}
+.leg2 div{display:grid;grid-template-columns:12px 1fr auto auto;gap:9px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line2);font-size:.98rem}
+.leg2 i{width:12px;height:12px;border-radius:3px}
+.leg2 em{font-style:normal;color:var(--dim);font-size:.9rem}
+.bars{display:flex;align-items:flex-end;gap:2px;height:150px;border-bottom:1px solid var(--line2);padding-top:6px}
+.bc{flex:1;height:100%;display:flex;align-items:flex-end;min-width:2px}
+.bc i{display:block;width:100%;border-radius:2px 2px 0 0}
+.bc.miss i{height:3px;background:rgba(255,255,255,.18)}
+.bx{display:flex;justify-content:space-between;color:var(--dim);font-size:.88rem;margin-top:4px}
+.lg3{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:10px;font-size:.9rem;color:var(--mut)}
+.lg3 span{display:inline-flex;gap:6px;align-items:center}.lg3 i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.mrow{display:grid;grid-template-columns:96px 1fr 40px 90px;gap:10px;align-items:center;padding:5px 0;font-size:.98rem}
+.mrow div{height:8px;background:#1b1b1b;border-radius:4px;overflow:hidden}.mrow div i{display:block;height:100%}
+.mrow em{font-style:normal;text-align:right;color:var(--mut)}
+.ins{list-style:none}.ins li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid var(--line2)}
+.ins li::before{content:"›";position:absolute;left:6px;color:var(--act);font-weight:700}
+/* ---------- dreams ---------- */
+.dl{display:flex;flex-direction:column;gap:8px}
+.dr{display:grid;grid-template-columns:60px minmax(0,1fr) 20px;gap:14px;align-items:center;width:100%;padding:12px 14px;border:1px solid var(--line2);border-radius:8px;background:var(--card);transition:.15s}
+.dr:hover{border-color:var(--act);background:rgba(var(--ac-rgb),.06)}
+.dd{text-align:center;padding:6px 0;border:1px solid var(--line);border-radius:6px}
+.dd b{display:block;font:700 1.3rem Orbitron,sans-serif;color:var(--act);line-height:1.1}
+.dd small{font:600 .66rem Orbitron,sans-serif;letter-spacing:1.5px;color:var(--mut)}
+.dh{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:5px}
+.fd{font-size:.95rem;color:var(--good);font-weight:600}
+.go{color:var(--dim);font-size:1.4rem}
+.mcard{border:1px solid rgba(75,224,122,.32);background:rgba(75,224,122,.05);border-radius:7px;padding:12px 14px;margin:10px 0}
+.mcard .h{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font:600 .74rem Orbitron,sans-serif;letter-spacing:1px;color:var(--good)}
+.mcard p{margin-top:6px;color:var(--mut)}
+.scanner{text-align:center;padding:30px}.scanner .r{width:84px;height:84px;margin:0 auto 12px;border-radius:50%;border:3px solid transparent;border-top-color:var(--ac);border-right-color:var(--ac);animation:spin 1s linear infinite}
+.bigb{display:block;width:100%;padding:22px;font:900 .95rem Orbitron,sans-serif;letter-spacing:3px;background:linear-gradient(135deg,rgba(var(--ac-rgb),.28),rgba(var(--ac-rgb),.08));border:2px solid var(--ac);border-radius:10px;color:var(--act);text-align:center}
+.bigb small{display:block;font-size:.66rem;letter-spacing:2px;margin-top:6px;color:var(--mut)}
+.bigb:hover{box-shadow:0 0 30px rgba(var(--ac-rgb),.4)}
+.dv{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;padding:12px 14px;border:1px solid var(--line2);border-radius:8px;background:var(--card);margin-bottom:8px;align-items:center}
+.dv .t b{display:block;font:700 .85rem Orbitron,sans-serif;color:var(--act)}.dv .t small{color:var(--mut)}
+.ints{letter-spacing:2px;color:var(--act)}
+/* ---------- astro / events ---------- */
+.sign{display:flex;gap:16px;align-items:center}
+.sign .gl{font-size:3.6rem;color:var(--act);line-height:1}
+.mn{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line2)}
+.mn span:first-child{font-size:1.5rem;width:30px;text-align:center}
+.mn b{display:block}.mn small{color:var(--mut)}
+.evg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:16px}
+.ev{display:flex;flex-direction:column;gap:6px;border-radius:8px;padding:14px;border:1px solid var(--line2);border-top:3px solid var(--c,var(--ac));background:var(--card)}
+.ev b{color:var(--c,var(--act));font-size:1.08rem}
+.ev p{color:var(--mut);font-size:.98rem;flex:1}
+.ev .m{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:.95rem;color:var(--mut)}
+.ev.pick{cursor:pointer;text-align:left}
+.ev.pick[aria-pressed=true]{border-color:var(--ac);background:rgba(var(--ac-rgb),.12);box-shadow:0 0 22px rgba(var(--ac-rgb),.25)}
+.ev .when{font:600 .78rem Orbitron,sans-serif;letter-spacing:1px;color:#fff}
+.sec{font:600 .74rem Orbitron,sans-serif;letter-spacing:3px;color:var(--dim);margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line2)}
+.yours{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+/* ---------- profile ---------- */
+.idcard{position:relative;border-radius:12px;padding:22px;border:1.5px solid var(--ac);background:linear-gradient(145deg,rgba(var(--ac-rgb),.22),rgba(0,0,0,.6) 60%);box-shadow:0 0 34px rgba(var(--ac-rgb),.2);overflow:hidden}
+.idcard::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;border:1px solid rgba(var(--ac-rgb),.35)}
+.idcard .tp{font:700 .72rem Orbitron,sans-serif;letter-spacing:3px;color:var(--mut)}
+.idcard .iid{font:900 1.45rem Orbitron,sans-serif;letter-spacing:3px;color:var(--act);margin:14px 0 4px;word-break:break-all}
+.idcard .inm{font-size:1.4rem;font-weight:700}
+.idcard .ir{display:flex;justify-content:space-between;gap:10px;margin-top:14px;font-size:.95rem;color:var(--mut)}
+.idcard .ir b{display:block;color:#fff;font-size:1rem}
+.idcard .tier{margin-top:16px;display:inline-block;padding:5px 10px;border-radius:3px;background:var(--ac);color:var(--on);font:700 .7rem Orbitron,sans-serif;letter-spacing:1.5px}
+@media(max-width:1000px){.split{grid-template-columns:1fr}.side{position:static}.gr2{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.pc{width:100%;height:100dvh;border-radius:0}.segs{grid-template-columns:1fr}.aw{grid-template-columns:1fr;justify-items:center;text-align:center}.ring{width:150px;height:150px}.alog{text-align:left;min-height:0}.hero{flex-wrap:wrap}.hcd{width:100%}.who{text-align:left}.wbody{padding:14px}.dv{grid-template-columns:1fr}.mrow{grid-template-columns:80px 1fr 30px 80px}.pcf .m{display:none}.tab{padding:7px 10px;font-size:.66rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wallpaper"><div class="gridbg"></div><div class="scan"></div>
+ <div class="pc">
+  <div class="screen" id="screen">
+   <div class="layer" id="boot"><div class="bl">IPNOTEC<small>VIRTUAL PC SYSTEM</small></div><div class="bb"><i id="bf"></i></div><div class="bs" id="bsx">Initializing hardware...</div></div>
+   <div class="layer" id="login" hidden></div>
+   <div class="layer" id="auth" hidden></div>
+   <main class="layer" id="desk" hidden></main>
+   <section class="layer" id="win" role="dialog" aria-modal="true" aria-labelledby="wt" hidden></section>
+   <nav class="dock" id="dock" aria-label="Apps" hidden></nav>
+  </div>
+  <div class="pcf"><span class="b">IPNOTEC VIRTUAL SYSTEM</span><span class="m" id="pcm">MODEL: IPV.BLR.BYB.001</span><button class="pw" id="pw" aria-label="Restart / sign out" title="Restart / sign out">⏻</button></div>
+ </div>
+</div>
+
+<!-- ======================= PURE LOGIC (no DOM) ======================= -->
+<script id="logic">
+const IPC=(()=>{'use strict';
+const MAX_CONTACTS=108,MIN_SHARED=2,WINDOW_DAYS=3,MIN_DREAM_CHARS=30;
+const pad=n=>String(n).padStart(2,'0'),iso=(y,m,d)=>y+'-'+pad(m)+'-'+pad(d);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+function parseISO(s){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');if(!m)return null;const y=+m[1],mo=+m[2],d=+m[3],t=new Date(Date.UTC(y,mo-1,d));return t.getUTCFullYear()===y&&t.getUTCMonth()===mo-1&&t.getUTCDate()===d?{y,m:mo,d}:null}
+const isLeap=y=>(y%4===0&&y%100!==0)||y%400===0;
+const todayISO=(now=new Date())=>iso(now.getFullYear(),now.getMonth()+1,now.getDate());
+const isoOf=ms=>todayISO(new Date(ms));
+function addDays(s,n){const p=parseISO(s),d=new Date(Date.UTC(p.y,p.m-1,p.d+n));return iso(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate())}
+function daysBetween(a,b){const x=parseISO(a),y=parseISO(b);return Math.round((Date.UTC(y.y,y.m-1,y.d)-Date.UTC(x.y,x.m-1,x.d))/864e5)}
+function weekday(s){const p=parseISO(s);return new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay()}
+function validDob(dob,today){const p=parseISO(dob);return !!p&&dob<=today&&p.y>=+today.slice(0,4)-120}
+function birthdayIn(dob,year){const p=parseISO(dob);if(!p)return null;let d=p.d;if(p.m===2&&d===29&&!isLeap(year))d=28;return iso(year,p.m,d)}
+function nextBirthday(dob,from){const f=parseISO(from);if(!f||!parseISO(dob))return null;let c=birthdayIn(dob,f.y);if(c<=from)c=birthdayIn(dob,f.y+1);return c}
+function upcomingBirthday(dob,today){const y=+today.slice(0,4),b=birthdayIn(dob,y);return b>=today?b:birthdayIn(dob,y+1)}
+function prevBirthday(dob,today){const y=+today.slice(0,4),b=birthdayIn(dob,y);return b<today?b:birthdayIn(dob,y-1)}
+function ageOn(dob,today){const a=parseISO(dob),b=parseISO(today);return b.y-a.y-((b.m*100+b.d)<(a.m*100+a.d)?1:0)}
+function msUntil(dateISO,now=new Date()){const p=parseISO(dateISO);return new Date(p.y,p.m-1,p.d).getTime()-now.getTime()}
+function mulberry32(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+const pick=(r,a)=>a[Math.floor(r()*a.length)],rint=(r,a,b)=>a+Math.floor(r()*(b-a+1));
+function shuffle(r,a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function wpick(r,pairs){const s=pairs.reduce((a,p)=>a+p[1],0);let x=r()*s;for(const p of pairs){x-=p[1];if(x<0)return p[0]}return pairs[pairs.length-1][0]}
+
+/* ---- personas ---- */
+const PERSONAS={
+ V:{n:'VIOLET',m:'Wealth & Investment',c:'#9B00FF',t:'#C470FF',on:'#fff',sw:'#9B00FF'},
+ I:{n:'INDIGO',m:'Innovation & Technology',c:'#0060B8',t:'#5AA9FF',on:'#fff',sw:'#0060B8'},
+ B:{n:'BLUE',m:'Branding & Trust',c:'#00A8E8',t:'#3CC4F5',on:'#000',sw:'#00A8E8'},
+ G:{n:'GREEN',m:'Revolution',c:'#39D353',t:'#5BE374',on:'#000',sw:'#39D353'},
+ Y:{n:'YELLOW',m:'Young Revolution · 18–23',c:'#FFD600',t:'#FFE04D',on:'#000',sw:'#FFD600'},
+ O:{n:'ORANGE',m:'Wisdom & Culture',c:'#FF6900',t:'#FF8A3D',on:'#000',sw:'#FF6900'},
+ R:{n:'RED',m:'Real Estate & Power',c:'#FF2828',t:'#FF6161',on:'#000',sw:'#FF2828'},
+ N:{n:'NARDO GREY',m:'Nomad · Just Curious',c:'#9B9B9B',t:'#C4C4C4',on:'#000',sw:'#9B9B9B'},
+ W:{n:'WHITE',m:'Policy makers & Health workers',c:'#F2F2F2',t:'#FFFFFF',on:'#000',sw:'#FFFFFF'},
+ X:{n:'BLACK',m:'Persona & city not chosen yet',c:'#E2E2E2',t:'#FFFFFF',on:'#000',sw:'#000000',mono:true}};
+
+/* ---- curated cities: codes|city|country|dial|currency|INR per unit (scaling only)|lat|lon|name pool|national digits ---- */
+const CITY_DATA=`BLR|Bengaluru|India|91|INR|1|12.97|77.59|IN|10
+BOM|Mumbai|India|91|INR|1|19.08|72.88|IN|10
+DEL|New Delhi|India|91|INR|1|28.61|77.21|IN|10
+MAA|Chennai|India|91|INR|1|13.08|80.27|IN|10
+HYD|Hyderabad|India|91|INR|1|17.39|78.49|IN|10
+CCU|Kolkata|India|91|INR|1|22.57|88.36|IN|10
+PNQ|Pune|India|91|INR|1|18.52|73.86|IN|10
+AMD|Ahmedabad|India|91|INR|1|23.02|72.57|IN|10
+COK|Kochi|India|91|INR|1|9.93|76.27|IN|10
+GOI,GOX|Goa|India|91|INR|1|15.49|73.83|IN|10
+JAI|Jaipur|India|91|INR|1|26.91|75.79|IN|10
+IXC|Chandigarh|India|91|INR|1|30.73|76.78|IN|10
+LKO|Lucknow|India|91|INR|1|26.85|80.95|IN|10
+TRV|Thiruvananthapuram|India|91|INR|1|8.52|76.94|IN|10
+CJB|Coimbatore|India|91|INR|1|11.02|76.96|IN|10
+IXE|Mangaluru|India|91|INR|1|12.91|74.86|IN|10
+MYQ|Mysuru|India|91|INR|1|12.30|76.64|IN|10
+VNS|Varanasi|India|91|INR|1|25.32|82.97|IN|10
+GAU|Guwahati|India|91|INR|1|26.14|91.74|IN|10
+BBI|Bhubaneswar|India|91|INR|1|20.30|85.82|IN|10
+NAG|Nagpur|India|91|INR|1|21.15|79.09|IN|10
+IDR|Indore|India|91|INR|1|22.72|75.86|IN|10
+ATQ|Amritsar|India|91|INR|1|31.63|74.87|IN|10
+CMB|Colombo|Sri Lanka|94|LKR|0.29|6.93|79.86|IN|9
+KTM|Kathmandu|Nepal|977|NPR|0.63|27.72|85.32|IN|10
+DAC|Dhaka|Bangladesh|880|BDT|0.73|23.81|90.41|IN|10
+MLE|Malé|Maldives|960|MVR|5.7|4.18|73.51|IN|7
+DXB|Dubai|United Arab Emirates|971|AED|23|25.20|55.27|ME|9
+AUH|Abu Dhabi|United Arab Emirates|971|AED|23|24.45|54.38|ME|9
+DOH|Doha|Qatar|974|QAR|23|25.29|51.53|ME|8
+RUH|Riyadh|Saudi Arabia|966|SAR|22|24.71|46.68|ME|9
+JED|Jeddah|Saudi Arabia|966|SAR|22|21.49|39.19|ME|9
+MCT|Muscat|Oman|968|OMR|216|23.59|58.41|ME|8
+BAH|Manama|Bahrain|973|BHD|221|26.23|50.59|ME|8
+KWI|Kuwait City|Kuwait|965|KWD|271|29.38|47.99|ME|8
+IST|Istanbul|Türkiye|90|TRY|2.4|41.01|28.98|ME|10
+CAI|Cairo|Egypt|20|EGP|1.8|30.04|31.24|ME|10
+CMN|Casablanca|Morocco|212|MAD|9|33.57|-7.59|ME|9
+LON,LHR,LGW|London|United Kingdom|44|GBP|110|51.51|-0.13|EU|10
+MAN|Manchester|United Kingdom|44|GBP|110|53.48|-2.24|EU|10
+EDI|Edinburgh|United Kingdom|44|GBP|110|55.95|-3.19|EU|10
+AMS|Amsterdam|Netherlands|31|EUR|97|52.37|4.90|EU|9
+PAR,CDG,ORY|Paris|France|33|EUR|97|48.86|2.35|EU|9
+FRA|Frankfurt|Germany|49|EUR|97|50.11|8.68|EU|10
+BER|Berlin|Germany|49|EUR|97|52.52|13.40|EU|10
+MUC|Munich|Germany|49|EUR|97|48.14|11.58|EU|10
+MAD|Madrid|Spain|34|EUR|97|40.42|-3.70|EU|9
+BCN|Barcelona|Spain|34|EUR|97|41.39|2.17|EU|9
+LIS|Lisbon|Portugal|351|EUR|97|38.72|-9.14|EU|9
+ROM,FCO|Rome|Italy|39|EUR|97|41.90|12.50|EU|10
+MIL,MXP,LIN|Milan|Italy|39|EUR|97|45.46|9.19|EU|10
+ZRH|Zurich|Switzerland|41|CHF|104|47.37|8.54|EU|9
+GVA|Geneva|Switzerland|41|CHF|104|46.20|6.14|EU|9
+VIE|Vienna|Austria|43|EUR|97|48.21|16.37|EU|10
+CPH|Copenhagen|Denmark|45|DKK|13|55.68|12.57|EU|8
+STO,ARN|Stockholm|Sweden|46|SEK|8.6|59.33|18.07|EU|9
+OSL|Oslo|Norway|47|NOK|8.3|59.91|10.75|EU|8
+HEL|Helsinki|Finland|358|EUR|97|60.17|24.94|EU|9
+DUB|Dublin|Ireland|353|EUR|97|53.35|-6.26|EU|9
+BRU|Brussels|Belgium|32|EUR|97|50.85|4.35|EU|9
+PRG|Prague|Czechia|420|CZK|3.9|50.08|14.44|EU|9
+WAW|Warsaw|Poland|48|PLN|22|52.23|21.01|EU|9
+ATH|Athens|Greece|30|EUR|97|37.98|23.73|EU|10
+NYC,JFK,EWR|New York|United States|1|USD|88|40.71|-74.01|AM|10
+SFO|San Francisco|United States|1|USD|88|37.77|-122.42|AM|10
+LAX|Los Angeles|United States|1|USD|88|34.05|-118.24|AM|10
+CHI,ORD|Chicago|United States|1|USD|88|41.88|-87.63|AM|10
+SEA|Seattle|United States|1|USD|88|47.61|-122.33|AM|10
+BOS|Boston|United States|1|USD|88|42.36|-71.06|AM|10
+AUS|Austin|United States|1|USD|88|30.27|-97.74|AM|10
+MIA|Miami|United States|1|USD|88|25.76|-80.19|AM|10
+WAS,IAD,DCA|Washington, D.C.|United States|1|USD|88|38.91|-77.04|AM|10
+YTO,YYZ|Toronto|Canada|1|CAD|63|43.65|-79.38|AM|10
+YVR|Vancouver|Canada|1|CAD|63|49.28|-123.12|AM|10
+MEX|Mexico City|Mexico|52|MXN|4.8|19.43|-99.13|AM|10
+SAO,GRU|São Paulo|Brazil|55|BRL|16|-23.55|-46.63|AM|11
+BUE,EZE|Buenos Aires|Argentina|54|ARS|0.06|-34.60|-58.38|AM|10
+SCL|Santiago|Chile|56|CLP|0.09|-33.45|-70.67|AM|9
+BOG|Bogotá|Colombia|57|COP|0.022|4.71|-74.07|AM|10
+SIN|Singapore|Singapore|65|SGD|68|1.35|103.82|EA|8
+HKG|Hong Kong|Hong Kong|852|HKD|11.3|22.32|114.17|EA|8
+TYO,NRT,HND|Tokyo|Japan|81|JPY|0.58|35.68|139.69|EA|10
+OSA,KIX|Osaka|Japan|81|JPY|0.58|34.69|135.50|EA|10
+SEL,ICN|Seoul|South Korea|82|KRW|0.062|37.57|126.98|EA|10
+BJS,PEK|Beijing|China|86|CNY|12.3|39.90|116.40|EA|11
+SHA,PVG|Shanghai|China|86|CNY|12.3|31.23|121.47|EA|11
+TPE|Taipei|Taiwan|886|TWD|2.8|25.03|121.57|EA|9
+BKK|Bangkok|Thailand|66|THB|2.6|13.76|100.50|EA|9
+KUL|Kuala Lumpur|Malaysia|60|MYR|20|3.14|101.69|EA|9
+JKT,CGK|Jakarta|Indonesia|62|IDR|0.0054|-6.21|106.85|EA|11
+MNL|Manila|Philippines|63|PHP|1.5|14.60|120.98|EA|10
+SGN|Ho Chi Minh City|Vietnam|84|VND|0.0034|10.82|106.63|EA|9
+SYD|Sydney|Australia|61|AUD|58|-33.87|151.21|EA|9
+MEL|Melbourne|Australia|61|AUD|58|-37.81|144.96|EA|9
+AKL|Auckland|New Zealand|64|NZD|52|-36.85|174.76|EA|9
+JNB|Johannesburg|South Africa|27|ZAR|4.9|-26.20|28.05|AF|9
+CPT|Cape Town|South Africa|27|ZAR|4.9|-33.92|18.42|AF|9
+NBO|Nairobi|Kenya|254|KES|0.68|-1.29|36.82|AF|9
+LOS|Lagos|Nigeria|234|NGN|0.057|6.52|3.38|AF|10
+KGL|Kigali|Rwanda|250|RWF|0.062|-1.95|30.06|AF|9
+ACC|Accra|Ghana|233|GHS|7|5.60|-0.19|AF|9`;
+const CITIES=CITY_DATA.trim().split('\n').map(l=>{const[codes,name,country,dial,cur,rate,lat,lon,reg,nl]=l.split('|');const cs=codes.split(',');return{code:cs[0],codes:cs,name,country,dial,cur,rate:+rate,lat:+lat,lon:+lon,reg,nl:+nl}});
+const CITY_IDX={};CITIES.forEach(c=>c.codes.forEach(k=>CITY_IDX[k]=c));
+const cityBy=k=>CITY_IDX[String(k||'').toUpperCase()]||null;
+const CITY_CODES=Object.keys(CITY_IDX).sort();
+
+/* ---- IPNOTEC ID ---- */
+function idSegments(raw){const s=String(raw||'').toUpperCase().replace(/\s+/g,''),parts=s.split('.'),[p='',c,u]=parts,out={};
+ const m=/^IP([VIBGYORNWX])$/.exec(p),pk=m?m[1]:null;
+ out.p=!p?{st:'',label:'IPV · IPI · IPB … IPX'}:pk?{st:'ok',label:PERSONAS[pk].n+' · '+PERSONAS[pk].m,sw:PERSONAS[pk].sw}:(/^I?P?$/.test(p)&&parts.length===1?{st:'',label:'Keep typing…'}:{st:'bad',label:'Unknown prefix'});
+ if(c===undefined)out.c={st:'',label:'BLR · DXB · LHR …'};
+ else if(pk==='X')out.c=c==='XXX'?{st:'ok',label:'Not chosen yet'}:(/^X{0,2}$/.test(c)&&parts.length===2?{st:'',label:'IPX uses XXX'}:{st:'bad',label:'IPX uses XXX'});
+ else if(c==='XXX')out.c={st:'bad',label:'XXX is for IPX only'};
+ else{const ct=cityBy(c);out.c=ct?{st:'ok',label:ct.name+', '+ct.country}:(/^[A-Z]{0,2}$/.test(c)&&parts.length===2?{st:'',label:'Keep typing…'}:{st:'bad',label:'Not on the IPNOTEC city list'})}
+ if(u===undefined)out.u={st:'',label:'3–16 letters / numbers'};
+ else if(/^[A-Z0-9]{3,16}$/.test(u)&&parts.length===3)out.u={st:'ok',label:'@'+u};
+ else if(/^[A-Z0-9]{0,2}$/.test(u)&&parts.length===3)out.u={st:'',label:'At least 3 characters'};
+ else out.u={st:'bad',label:'Letters & numbers only, max 16'};
+ return out}
+function parseID(raw){const s=String(raw||'').toUpperCase().replace(/\s+/g,''),parts=s.split('.'),[p,c,u]=parts,r={raw:s,ok:false,prefix:null,persona:null,city:null,cityCode:c||'',user:u||'',errors:[]};
+ if(!s){r.errors.push('Enter your IPNOTEC ID, e.g. IPO.BLR.1001.');return r}
+ if(parts.length!==3)r.errors.push('An IPNOTEC ID has three parts separated by dots: PREFIX.CITY.USERNAME (e.g. IPO.BLR.1001).');
+ const m=/^IP([VIBGYORNWX])$/.exec(p||'');if(m){r.prefix=m[1];r.persona=PERSONAS[m[1]]}else r.errors.push('The prefix must be one of IPV, IPI, IPB, IPG, IPY, IPO, IPR, IPN, IPW or IPX.');
+ if(c!==undefined){if(r.prefix==='X'){if(c!=='XXX')r.errors.push('IPX members have not chosen a city yet, so the city part is XXX (e.g. IPX.XXX.'+(u&&/^[A-Z0-9]{3,16}$/.test(u)?u:'NEWBIE')+').')}
+  else if(c==='XXX')r.errors.push('XXX is reserved for IPX (no city chosen yet). Use a city code such as BLR, DXB or LHR.');
+  else{const ct=cityBy(c);if(ct)r.city=ct;else r.errors.push(/^[A-Z]{3}$/.test(c)?'City code '+c+' is not on the IPNOTEC city list yet. Try BLR, BOM, DXB, LHR, AMS, NYC or SIN.':'The city part must be a 3-letter airport / city code, e.g. BLR.')}}
+ if(u!==undefined&&!/^[A-Z0-9]{3,16}$/.test(u))r.errors.push('The username must be 3–16 letters and/or numbers, no symbols or spaces.');
+ r.ok=parts.length===3&&!r.errors.length;return r}
+
+/* ---- phones & contacts ---- */
+function normalizePhone(s){let d=String(s||'').replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);if(d.length<8||d.length>15)return '';return d.length>10?d.slice(-10):d}
+const validName=n=>{const t=String(n||'').trim();return t.length>=2&&/\p{L}/u.test(t)};
+const CATS=['family','friends','professional','mentor','other'];
+function bookStats(contacts,ownPhone){const own=normalizePhone(ownPhone),seen=new Set(),bad=[];let valid=0;
+ for(const c of contacts){const k=normalizePhone(c.phone);let w='';if(!validName(c.name))w='name';else if(!k)w='phone';else if(own&&k===own)w='own';else if(seen.has(k))w='duplicate';
+  if(w)bad.push({id:c.id,why:w});else{seen.add(k);valid++}}
+ return{valid,bad}}
+function genPhone(r,c){const n=c.nl;let d=String(c.dial==='91'?rint(r,6,9):c.dial==='1'?rint(r,2,9):rint(r,1,9));while(d.length<n)d+=rint(r,0,9);
+ const G={7:[3,4],8:[4,4],9:[1,4,4],10:c.dial==='91'?[5,5]:[3,3,4],11:[3,4,4]}[n]||[n];let i=0;return '+'+c.dial+' '+G.map(g=>{const s=d.slice(i,i+g);i+=g;return s}).join(' ')}
+const NAMES={
+ IN:{f:'Aarav Aditi Ananya Arjun Asha Deepak Divya Farhan Gaurav Isha Karthik Kavya Lakshmi Manish Meera Neha Nikhil Pooja Priya Rahul Ravi Rohan Sana Sanjay Shreya Suresh Tanvi Varun Vikram Zoya'.split(' '),l:'Rao Kumar Nair Iyer Menon Shah Verma Das Kapoor Pillai Reddy Singh Bhat Gupta Desai Jain Khan Mehta Joshi Hegde Kulkarni Banerjee Patil Chatterjee Shetty'.split(' ')},
+ EU:{f:'Lucas Emma Noah Sophie Liam Mila Daan Julia Hugo Clara Leon Anna Mateo Elena Oscar Lea Felix Ines Jonas Freya Luca Chloé Theo Nora Max Ida Arthur Zoe'.split(' '),l:['de Vries','Jansen','Müller','Schmidt','Martin','Bernard','Rossi','Bianchi','García','López','Silva','Santos','Smith','Brown','Wilson','Taylor','Nielsen','Larsen','Andersson','Kowalski','Novak','Murphy','Dubois','Weber']},
+ AM:{f:'James Olivia Ethan Ava Mason Isabella Lucas Mia Benjamin Harper Diego Camila Gabriel Valentina Daniel Sofia Samuel Emily Mateo Grace'.split(' '),l:'Johnson Williams Brown Davis Miller Garcia Rodriguez Martinez Hernandez Lopez Clark Lewis Walker Young Allen Carter Rivera Torres Gomez Murphy'.split(' ')},
+ ME:{f:'Omar Layla Ahmed Fatima Yusuf Mariam Khalid Noor Hassan Aisha Tariq Huda Zayd Salma Karim Rania Faisal Lina Hamza Yasmin'.split(' '),l:['Al Mansoori','Haddad','Al Farsi','Khalil','Nasser','Saleh','Al Hashimi','Rahman','Aziz','Hamdan','Qureshi','Karam','Darwish','Yousef','Mahmoud']},
+ EA:{f:'Wei Mei Hiro Yuki Ji-ho Min-ji Arif Siti Kenji Hana Daniel Aiko Jun Lin Rizal Mai Tom Ella Ken Nadia'.split(' '),l:'Tan Lim Wong Chen Li Wang Sato Suzuki Takahashi Kim Park Lee Nguyen Tran Santos Reyes Ong Ng'.split(' ')},
+ AF:{f:'Thabo Amara Kwame Zainab Tendai Ngozi Kofi Aisha Sipho Wanjiru Chidi Imani Jabari Nia Tunde Ayo'.split(' '),l:'Okafor Mensah Ndlovu Mwangi Adeyemi Banda Kamau Okoye Dlamini Otieno Nkosi Abubakar Diallo Achieng'.split(' ')}};
+function genContacts(r,base,ownPhone){const others=CITIES.filter(c=>c.country!==base.country),seenN=new Set(),seenP=new Set([normalizePhone(ownPhone)]),out=[];
+ const PRI=[...Array(12).fill(1),...Array(36).fill(2),...Array(60).fill(3)];
+ for(let i=0;i<MAX_CONTACTS;i++){const pri=PRI[i],c=r()<.85?base:pick(r,others),pool=NAMES[c.reg];let nm,tries=0;do{nm=pick(r,pool.f)+' '+pick(r,pool.l)}while(seenN.has(nm)&&++tries<60);seenN.add(nm);
+  let ph,k;do{ph=genPhone(r,c);k=normalizePhone(ph)}while(!k||seenP.has(k));seenP.add(k);
+  const cat=pri===1?wpick(r,[['family',6],['friends',3],['mentor',1]]):pri===2?wpick(r,[['friends',5],['professional',3],['mentor',2],['family',1]]):wpick(r,[['professional',5],['friends',3],['other',2]]);
+  const em=r()<.35?nm.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z]+/g,'.').replace(/^\.|\.$/g,'')+'@'+pick(r,['gmail.com','outlook.com','proton.me','ipnotec.vip']):'';
+  out.push({id:'c'+i,name:nm,phone:ph,email:em,cat,pri})}
+ return out}
+function lockState(lock,today){if(!lock)return 'unlocked';if(today<lock.unlockOn)return 'locked';if(today===lock.unlockOn)return 'reveal';return 'expired'}
+
+/* ---- birthday simulation + matching (by phone number + same priority) ---- */
+function simulateNetwork(contacts,ownPhone,rng=Math.random,o={}){const hp=o.holdP??.4,sp=o.sameP??.5,books={};
+ for(const c of contacts){const k=normalizePhone(c.phone),book=[],n=1+Math.floor(rng()*3);
+  for(let i=0;i<n;i++)book.push({phone:'9'+String(Math.floor(rng()*1e9)).padStart(9,'0'),pri:1+Math.floor(rng()*3)});
+  if(rng()<hp){let pri=c.pri;if(rng()>=sp){const ot=[1,2,3].filter(x=>x!==c.pri);pri=ot[Math.floor(rng()*2)]}book.splice(Math.floor(rng()*(book.length+1)),0,{phone:ownPhone,pri})}
+  books[k]=book}
+ return books}
+function matchBirthday(contacts,ownPhone,books){const own=normalizePhone(ownPhone),by={1:[],2:[],3:[]},seen=new Set();let total=0;
+ for(const c of contacts){const k=normalizePhone(c.phone);if(!k||k===own||seen.has(k))continue;seen.add(k);total++;
+  const e=(books[k]||[]).find(x=>normalizePhone(x.phone)===own);if(e&&e.pri===c.pri)by[c.pri].push({id:c.id,name:c.name,phone:c.phone,pri:c.pri})}
+ const matches=[...by[1],...by[2],...by[3]];return{by,matches,total,count:matches.length}}
+function runBirthday({contacts,ownPhone,seed,holdP,sameP}){const rng=seed==null?Math.random:mulberry32(seed);return matchBirthday(contacts,ownPhone,simulateNetwork(contacts,ownPhone,rng,{holdP,sameP}))}
+
+/* ---- dreams ---- */
+const MOODS=['Frightened','Inspiring','Relaxed','Joyful','Sad','Confusing','Exciting','Neutral'];
+const STOP=new Set('about above after again against along also always another around because been before being below between both came cannot could dont down during each even ever every from gets going gone have having here into just kind know like made make many maybe more most much must never only other over really said same seemed should since some something somehow still such take than that their them then there these they thing think this those through time very want were what when where which while whom will with without would your dream dreamt dreamed felt feel seem suddenly near kept every nobody everyone across simply whole'.split(' '));
+function stem(w){if(w.length>4&&w.endsWith('ies'))return w.slice(0,-3)+'y';
+ for(const suf of['ing','ed']){if(w.length>(suf==='ing'?5:4)&&w.endsWith(suf)){let r=w.slice(0,-suf.length);if(r.length>=4&&r.at(-1)===r.at(-2)&&!'lsz'.includes(r.at(-1)))r=r.slice(0,-1);return r.length>=3&&/[aeiouy]/.test(r)?r:w}}
+ if(w.length>4&&w.endsWith('s')&&!w.endsWith('ss')&&!w.endsWith('us'))return w.slice(0,-1);return w}
+const tokens=t=>(String(t||'').toLowerCase().match(/\p{L}+/gu)||[]).filter(w=>w.length>=4&&!STOP.has(w)).map(w=>({k:stem(w),l:w}));
+function keywords(text,n=6){const f=new Map();tokens(text).forEach((t,i)=>{const e=f.get(t.k);if(e)e.c++;else f.set(t.k,{k:t.k,l:t.l,c:1,i})});return[...f.values()].sort((a,b)=>b.c-a.c||a.i-b.i).slice(0,n).map(({k,l})=>({k,l}))}
+function summarize(text){const t=String(text||'').replace(/\s+/g,' ').trim();if(t.length<=140)return t;const ss=t.match(/[^.!?]+[.!?]*/g)||[t],fr={};tokens(t).forEach(x=>fr[x.k]=(fr[x.k]||0)+1);
+ const sc=ss.map((s,i)=>{const tk=tokens(s);return{i,s:s.trim(),v:tk.reduce((a,x)=>a+fr[x.k],0)/Math.sqrt(tk.length||1)}}).sort((a,b)=>b.v-a.v);
+ let sel=[sc[0]];if(sc[1]&&sc[0].s.length<90)sel.push(sc[1]);const p=sel.sort((a,b)=>a.i-b.i).map(x=>x.s).join(' ');return p.length>180?p.slice(0,177).replace(/\s+\S*$/,'')+'…':p}
+function validateDream(d,today){if(!parseISO(d.date)||d.date>today)return 'Choose a valid date (not in the future).';if(!['yes','no','forgot'].includes(d.recall))return 'Answer: did you remember your dream?';
+ if(d.recall!=='yes')return '';if(!MOODS.includes(d.mood))return 'Pick the mood of the dream.';if(String(d.text||'').trim().length<MIN_DREAM_CHARS)return 'Describe the dream (at least '+MIN_DREAM_CHARS+' characters).';
+ if(!d.summary)return 'Click “Create summary” first.';return ''}
+const LIB=['flying ocean city light|Inspiring|Soaring above a glowing city and an endless ocean.','falling stairs darkness basement|Frightened|Falling down endless stairs into the dark.','exam school late classroom|Frightened|Arriving late to an exam in a school that kept changing.','house rooms door hidden|Confusing|Finding hidden rooms behind a door in a familiar house.','forest river deer sunrise|Relaxed|Walking through a quiet forest beside a river at dawn.','train station missing luggage|Confusing|Missing a train while luggage kept disappearing.','mountain climbing summit snow|Inspiring|Climbing a snowy mountain and reaching the summit.','childhood mother kitchen garden|Relaxed|Back in a childhood kitchen with family nearby.','chased running tunnel shadow|Frightened|Being chased through a tunnel by a faceless shadow.','swimming ocean waves island|Exciting|Swimming through giant waves toward a bright island.','bridge river crossing fog|Neutral|Crossing a long bridge in thick fog.','teeth mirror falling cracked|Frightened|Teeth crumbling while looking into a cracked mirror.','school friends reunion party|Joyful|A school reunion party with everyone laughing.','city rooftop night lights|Exciting|Running across city rooftops under neon lights.','door key locked corridor|Confusing|A corridor of locked doors and a key that keeps changing.','garden flowers rain butterflies|Relaxed|Standing in a garden while rain falls on blooming flowers.','car driving road brakes|Frightened|Driving a car whose brakes stop working.','music concert stage crowd|Joyful|Performing on a stage to a cheering crowd.','flying mountain wings eagle|Inspiring|Gliding over mountains alongside an eagle.','ship storm ocean island|Exciting|A ship crossing a storm toward a hidden island.','house flood water rooms|Frightened|Water rising slowly through the rooms of a house.','library books stairs night|Neutral|Wandering a silent library with endless stairs.','phone message call lost|Sad|Trying to reach someone on a phone that will not connect.','village market festival colours|Joyful|A village market alive with festival colours.'].map(s=>{const[w,m,t]=s.split('|');return{raw:w.split(' '),mood:m,summary:t}});
+function buildPool(dreamDate,seed,userKw){const rng=mulberry32(seed),pool=[],hd=()=>'DREAMER #'+(hashStr(String(rng()))%65536).toString(16).toUpperCase().padStart(4,'0');
+ LIB.forEach(e=>{const k=1+Math.floor(rng()*3);for(let j=0;j<k;j++)pool.push({id:'l'+pool.length,handle:hd(),date:addDays(dreamDate,Math.floor(rng()*11)-5),words:e.raw.map(stem),labels:e.raw,mood:e.mood,summary:e.summary})});
+ if(userKw&&userKw.length>=2){const n=1+Math.floor(rng()*3);for(let i=0;i<n;i++){const sh=userKw.slice().sort(()=>rng()-.5).slice(0,2+Math.floor(rng()*Math.min(2,userKw.length-1))),ex=LIB[Math.floor(rng()*LIB.length)].raw.slice(0,1+Math.floor(rng()*2)),mood=MOODS[Math.floor(rng()*MOODS.length)];
+  pool.push({id:'e'+i,handle:hd(),date:addDays(dreamDate,Math.floor(rng()*5)-2),words:[...new Set([...sh.map(x=>x.k),...ex.map(stem)])],labels:[...sh.map(x=>x.l),...ex],mood,summary:'A dreamer recalls '+sh.map(x=>x.l).join(', ')+' and '+ex[0]+', ending in a '+mood.toLowerCase()+' mood.'})}}
+ return pool}
+function findMatches(dream,pool,o={}){if(!dream||!dream.online||dream.recall!=='yes')return[];const min=o.minShared??MIN_SHARED,win=o.windowDays??WINDOW_DAYS,mine=new Map((dream.keywords||[]).map(x=>[x.k,x.l]));
+ return pool.map(p=>({p,sh:p.words.filter(w=>mine.has(w))})).filter(({p,sh})=>sh.length>=min&&Math.abs(daysBetween(dream.date,p.date))<=win)
+  .map(({p,sh})=>({id:p.id,handle:p.handle,date:p.date,shared:sh.map(w=>mine.get(w)),sharedCount:sh.length,mood:p.mood,summary:p.summary,simulated:true}))
+  .sort((a,b)=>b.sharedCount-a.sharedCount||Math.abs(daysBetween(dream.date,a.date))-Math.abs(daysBetween(dream.date,b.date)))}
+function scanDream(dream,salt=0){return findMatches(dream,buildPool(dream.date,hashStr(dream.id+':'+salt),dream.keywords)).slice(0,12)}
+const DREAM_TXT=[
+ ['Inspiring','I was flying over a city made of light, then out over an endless ocean. The wind felt warm and I was not afraid at all. Below me the city lights slowly turned into stars.'],
+ ['Frightened','I kept falling down a staircase that never ended. Every floor was darker than the last and the basement door was wide open. I woke up just before reaching the bottom of the stairs.'],
+ ['Frightened','I was late for an exam in my old school. The classroom kept moving to a different floor and none of my classmates would tell me where it was.'],
+ ['Confusing','There was a hidden door in my childhood house. Behind it were rooms I had never seen, each one filled with old furniture and faded photographs of the house.'],
+ ['Relaxed','I walked through a quiet forest beside a slow river at sunrise. A deer crossed the path, looked at me for a long moment and walked back into the forest.'],
+ ['Confusing','I was running to catch a train at a crowded station but my luggage kept disappearing. Every time I found a bag at the station it belonged to someone else.'],
+ ['Inspiring','I was climbing a steep mountain through deep snow with an old friend. When we reached the summit the clouds opened and the whole valley below the mountain was glowing.'],
+ ['Relaxed','My mother was cooking in our old kitchen and the garden outside was full of flowers. The kitchen smelled of fresh bread and the garden door was open.'],
+ ['Frightened','Someone was chasing me through a long tunnel. Their shadow had no face, and the tunnel kept getting narrower the longer I kept running.'],
+ ['Exciting','I was swimming through huge ocean waves toward a bright island. Dolphins swam beside me, the waves lifted me gently and the island kept glowing.'],
+ ['Joyful','There was a school reunion party on a rooftop. All my old school friends were there, the music was loud and the party went on until sunrise.'],
+ ['Exciting','I was running across city rooftops at night, jumping between buildings under bright neon lights. From each rooftop I could see the whole city glowing.'],
+ ['Confusing','I was standing in a corridor full of locked doors. I had a key, but every time I tried a door the key changed shape and the corridor grew longer.'],
+ ['Frightened','Water was slowly rising through every room of the house. I kept carrying books upstairs but the flood water followed me from room to room.'],
+ ['Joyful','I was performing music on a big stage and the crowd was singing along. My family stood in the front row of the crowd, waving at the stage.'],
+ ['Sad','I was trying to call someone on my phone but the call would not connect. Every message I typed got lost and the phone screen kept flickering.'],
+ ['Neutral','I was crossing a long bridge over a wide river in thick fog. I could hear voices on the other side of the river but the bridge never ended.'],
+ ['Relaxed','I stood in a garden while warm rain fell on the flowers. Butterflies kept landing on my hands and the rain sounded like soft music in the garden.']];
+
+/* ---- check-in / spend ---- */
+const CMOODS=['Needful','Grateful','Want Day','Impulse','Stressed','Joyful'],REASONS=['Food & dining','Shopping','Transport','Entertainment','Health','Gifts & giving','Unplanned bill','Other'];
+const RW=[['Food & dining',26,150,1200,['Dinner out','Late-night order','Coffee run','Team lunch']],['Shopping',16,400,4000,['Sneakers','Gadget accessory','Clothes','Home décor']],['Transport',18,80,900,['Cab surge','Airport ride','Fuel top-up','Late-night ride']],['Entertainment',12,250,2000,['Movie night','Concert ticket','Gaming','Streaming add-on']],['Health',6,200,2500,['Pharmacy','Physio session','Supplements','Gym day pass']],['Gifts & giving',8,300,3000,['Birthday gift','Donation','Wedding gift','Flowers']],['Unplanned bill',6,500,5000,['Phone repair','Late fee','Plumber','Laptop service']],['Other',8,100,1500,['Stationery','Pet supplies','Haircut','Misc']]];
+const DAYNOTES=['Long day at work','Met an old friend','Rainy evening','Quiet day at home','Family visit','Deadline crunch','Great workout','Weekend errands','Celebrated a small win','Travelled across town'];
+function niceAmt(v){if(v<=0)return 0;const e=Math.pow(10,Math.max(0,Math.floor(Math.log10(v))-1));return Math.max(1,Math.round(v/e)*e)}
+function validateCheckin(x){const a=Number(x.amt);if(x.amt===''||x.amt==null||!isFinite(a)||a<0||a>1e9)return 'Enter the extra amount (0 if none).';if(a>0&&!REASONS.includes(x.reason))return 'Pick a reason for the extra spend.';if(!CMOODS.includes(x.mood))return 'Tell us how the day was.';return ''}
+function rangeSummary(list,from,to){const m=list.filter(e=>e.date>=from&&e.date<=to),total=m.reduce((s,e)=>s+e.amt,0),by={},mood={};
+ m.forEach(e=>{if(e.amt>0)by[e.reason]=(by[e.reason]||0)+e.amt;const o=mood[e.mood]||(mood[e.mood]={n:0,amt:0});o.n++;o.amt+=e.amt});
+ const top=Object.entries(by).sort((a,b)=>b[1]-a[1]);return{total,days:m.length,zero:m.filter(e=>!e.amt).length,avg:m.length?total/m.length:0,by:top,topReason:top[0]?top[0][0]:'—',mood,entries:m}}
+function streak(list,today){const s=new Set(list.map(e=>e.date));let d=s.has(today)?today:addDays(today,-1),n=0;while(s.has(d)){n++;d=addDays(d,-1)}return n}
+function insights(sum){const out=[],e=sum.entries;if(!e.length)return out;const avg=a=>a.length?a.reduce((s,x)=>s+x.amt,0)/a.length:0;
+ if(sum.by[0]&&sum.total)out.push({k:'top',reason:sum.by[0][0],pct:Math.round(sum.by[0][1]/sum.total*100)});
+ const want=e.filter(x=>x.mood==='Impulse'||x.mood==='Want Day'),rest=e.filter(x=>!(x.mood==='Impulse'||x.mood==='Want Day'));
+ if(want.length>=2&&rest.length&&avg(rest)>0)out.push({k:'impulse',x:Math.round(avg(want)/avg(rest)*10)/10,n:want.length});
+ const big=e.reduce((m,x)=>x.amt>(m?m.amt:0)?x:m,null);if(big&&big.amt)out.push({k:'big',e:big});
+ const we=e.filter(x=>[0,6].includes(weekday(x.date))),wd=e.filter(x=>![0,6].includes(weekday(x.date)));if(we.length>=2&&wd.length>=2&&avg(wd)>0)out.push({k:'weekend',x:Math.round(avg(we)/avg(wd)*10)/10});
+ out.push({k:'zero',n:sum.zero,days:sum.days});return out}
+
+/* ---- déjà vu ---- */
+const DV_NOTES=['Walked into a café I had never visited and knew the order before seeing the menu.','A colleague said a full sentence I was sure I had heard before, word for word.','Turned a corner and the street looked exactly like a dream from last month.','A song on the radio and the smell of rain together felt like a repeat.','Met a stranger at a meeting who felt completely familiar.','Entered a meeting room and already knew where everyone would sit.','Watched kids playing in a park; the exact same scene, again.','Read a message and predicted the next line before scrolling.','Stood at a traffic signal and knew which car would turn first.','Heard a laugh across the room that I had heard in this exact moment before.'];
+function geo(lat1,lon1,lat2,lon2){const R=6371,t=x=>x*Math.PI/180,dLat=t(lat2-lat1),dLon=t(lon2-lon1),a=Math.sin(dLat/2)**2+Math.cos(t(lat1))*Math.cos(t(lat2))*Math.sin(dLon/2)**2,km=2*R*Math.asin(Math.sqrt(a));
+ const y=Math.sin(dLon)*Math.cos(t(lat2)),x=Math.cos(t(lat1))*Math.sin(t(lat2))-Math.sin(t(lat1))*Math.cos(t(lat2))*Math.cos(dLon),b=(Math.atan2(y,x)*180/Math.PI+360)%360;return{km,dir:['N','NE','E','SE','S','SW','W','NW'][Math.round(b/45)%8]}}
+function jitter(r,c,minKm,maxKm){const dist=minKm+r()*(maxKm-minKm),b=r()*2*Math.PI;return{lat:Math.round((c.lat+dist*Math.cos(b)/111)*1000)/1000,lon:Math.round((c.lon+dist*Math.sin(b)/(111*Math.cos(c.lat*Math.PI/180)))*1000)/1000}}
+
+/* ---- astrology (western tropical sun sign, reference only) ---- */
+const SIGNS=[
+{n:'Capricorn',g:'♑',rg:'Dec 22 – Jan 19',el:'Earth',mo:'Cardinal',ru:'Saturn',tr:['Disciplined','Patient','Ambitious'],th:['Building something that lasts','Balancing duty with rest'],ac:['Break one long-term goal into three small steps','Do a 25-minute focused work block, then fully rest','Tidy one corner of your workspace']},
+{n:'Aquarius',g:'♒',rg:'Jan 20 – Feb 18',el:'Air',mo:'Fixed',ru:'Saturn (traditional)',tr:['Original','Curious','Independent'],th:['Belonging vs independence','Ideas worth sharing'],ac:['Share one idea with a friend and ask for pushback','Try a new tool or hobby for 20 minutes','Give an hour to a local group or cause']},
+{n:'Pisces',g:'♓',rg:'Feb 19 – Mar 20',el:'Water',mo:'Mutable',ru:'Jupiter (traditional)',tr:['Imaginative','Empathetic','Adaptable'],th:['Compassion with boundaries','Turning imagination into output'],ac:['Free-write for 10 minutes without editing','Take a phone-free walk','Make something small with your hands']},
+{n:'Aries',g:'♈',rg:'Mar 21 – Apr 19',el:'Fire',mo:'Cardinal',ru:'Mars',tr:['Direct','Energetic','Pioneering'],th:['Patience before action','Channeling drive into finishing'],ac:['Set a short physical challenge and complete it','Work 10 minutes on the task you are avoiding','Ask someone for honest feedback']},
+{n:'Taurus',g:'♉',rg:'Apr 20 – May 20',el:'Earth',mo:'Fixed',ru:'Venus',tr:['Steady','Sensory','Loyal'],th:['Comfort vs growth','Valuing what you already have'],ac:['Cook a meal from scratch','Spend 30 minutes outdoors','Review one habit or budget line']},
+{n:'Gemini',g:'♊',rg:'May 21 – Jun 20',el:'Air',mo:'Mutable',ru:'Mercury',tr:['Curious','Communicative','Versatile'],th:['Depth vs breadth','Listening as much as talking'],ac:['Call someone you have not spoken to in a while','Learn one new thing for 10 minutes','Write a short note to a friend']},
+{n:'Cancer',g:'♋',rg:'Jun 21 – Jul 22',el:'Water',mo:'Cardinal',ru:'Moon',tr:['Caring','Intuitive','Protective'],th:['Safety and openness','Home as a base, not a hideout'],ac:['Share a meal with family or friends','Refresh one part of your living space','Write a three-item gratitude list']},
+{n:'Leo',g:'♌',rg:'Jul 23 – Aug 22',el:'Fire',mo:'Fixed',ru:'Sun',tr:['Warm','Generous','Expressive'],th:['Recognition vs inner satisfaction','Leading with kindness'],ac:['Make something creative and show it to someone','Give three sincere compliments','Speak up once in your next meeting']},
+{n:'Virgo',g:'♍',rg:'Aug 23 – Sep 22',el:'Earth',mo:'Mutable',ru:'Mercury',tr:['Analytical','Helpful','Detail-minded'],th:['Perfection vs progress','Being as kind to yourself as to others'],ac:['Declutter one drawer','Plan your week in 15 minutes','Ship one task at “good enough”']},
+{n:'Libra',g:'♎',rg:'Sep 23 – Oct 22',el:'Air',mo:'Cardinal',ru:'Venus',tr:['Diplomatic','Fair-minded','Sociable'],th:['Decisiveness','Harmony without people-pleasing'],ac:['Decide one pending thing in 10 minutes','Visit a gallery or listen to a full album','Have one candid conversation you have postponed']},
+{n:'Scorpio',g:'♏',rg:'Oct 23 – Nov 21',el:'Water',mo:'Fixed',ru:'Mars (traditional)',tr:['Intense','Resourceful','Private'],th:['Trust and openness','Letting go of what is finished'],ac:['Journal one thing to release','Give a hard problem 40 uninterrupted minutes','Share something honest with someone you trust']},
+{n:'Sagittarius',g:'♐',rg:'Nov 22 – Dec 21',el:'Fire',mo:'Mutable',ru:'Jupiter',tr:['Adventurous','Optimistic','Candid'],th:['Freedom and commitment','Curiosity that finishes things'],ac:['Explore a new route or neighbourhood','Read about a culture unfamiliar to you','Sketch a small trip you could take this year']}];
+function signFor(dob){const p=parseISO(dob);if(!p)return null;const md=p.m*100+p.d;const i=(md>=1222||md<=119)?0:md<=218?1:md<=320?2:md<=419?3:md<=520?4:md<=620?5:md<=722?6:md<=822?7:md<=922?8:md<=1022?9:md<=1121?10:11;
+ const edges=[1222,120,219,321,420,521,621,723,823,923,1023,1122],ends=[119,218,320,419,520,620,722,822,922,1022,1121,1221];return{...SIGNS[i],cusp:md===edges[i]||md===ends[i]}}
+/* moon: mean synodic month from the 6 Jan 2000 18:14 UTC new moon (accurate to within about a day) */
+const SYN=29.530588853,REF=Date.UTC(2000,0,6,18,14),DAYMS=864e5;
+function moonEvents(fromISO,days){const p=parseISO(fromISO),start=new Date(p.y,p.m-1,p.d).getTime(),end=start+days*DAYMS,out=[];let k=Math.floor((start-REF)/(SYN*DAYMS))-1;
+ for(;;k++){const nm=REF+k*SYN*DAYMS;if(nm>end)break;[[0,'New moon'],[.25,'First quarter'],[.5,'Full moon'],[.75,'Last quarter']].forEach(([f,n])=>{const t=nm+f*SYN*DAYMS;if(t>=start&&t<end)out.push({t,name:n,d:isoOf(t)})})}
+ return out.sort((a,b)=>a.t-b.t)}
+function moonNow(ms){const age=(((ms-REF)/DAYMS)%SYN+SYN)%SYN,ill=(1-Math.cos(2*Math.PI*age/SYN))/2,names=['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent'];return{age,ill,name:names[Math.floor(age/SYN*8+.5)%8]}}
+
+/* ---- calendar helpers + events ---- */
+function nthWeekday(y,m,wd,n){const f=new Date(Date.UTC(y,m-1,1)).getUTCDay();return iso(y,m,1+((wd-f+7)%7)+(n-1)*7)}
+function lastWeekday(y,m,wd){const last=new Date(Date.UTC(y,m,0)).getUTCDate(),dw=new Date(Date.UTC(y,m-1,last)).getUTCDay();return iso(y,m,last-((dw-wd+7)%7))}
+function nextWeekday(from,wd){return addDays(from,(wd-weekday(from)+7)%7)}
+function nextNthWeekday(from,wd,n){const p=parseISO(from);let d=nthWeekday(p.y,p.m,wd,n);if(d<from){const y=p.m===12?p.y+1:p.y,m=p.m===12?1:p.m+1;d=nthWeekday(y,m,wd,n)}return d}
+function nextLastWeekday(from,wd){const p=parseISO(from);let d=lastWeekday(p.y,p.m,wd);if(d<from){const y=p.m===12?p.y+1:p.y,m=p.m===12?1:p.m+1;d=lastWeekday(y,m,wd)}return d}
+const CIRCLE={V:['Wealth Circle','Violet members compare notes on investing and long-term wealth. Frameworks, not tips.'],I:['Innovation Lab Night','Show-and-tell for builders: demos, prototypes and honest feedback.'],B:['Brand Trust Clinic','Bring your brand or pitch; leave with clear, practical critique.'],G:['Green Revolution Circle','Sustainable living and eco-conscious business, one practical habit at a time.'],Y:['Young Revolution Meetup','For members aged 18–23: ideas, careers and first ventures.'],O:['Wisdom & Culture Evening','Conversations on culture, craft and the stories behind them.'],R:['Real Estate & Power Roundtable','Property, markets and city development, discussed by people who build them.'],N:['Nomad Open House','For the curious: meet every colour and find where you fit.'],W:['Policy & Health Roundtable','Policy makers and health workers on what is working on the ground.'],X:['Find Your Colour Session','Undecided? Meet members of every colour, then choose your persona and Future City.']};
+function monthlyOptions(today,pk){const p=parseISO(today);
+ const build=(y,m)=>{const ym=iso(y,m,1).slice(0,7);return[
+  {id:'meet',t:"IPNOTEC VIP Members' Meet",d:nthWeekday(y,m,6,3),time:'6:00 PM',desc:'A curated evening of introductions and short talks with members from every colour.'},
+  {id:'circle',t:CIRCLE[pk][0],d:nthWeekday(y,m,4,2),time:'7:00 PM',desc:CIRCLE[pk][1],yours:true},
+  {id:'cowork',t:'Silent Co-Working Day',d:lastWeekday(y,m,5),time:'10 AM – 5 PM',desc:'A full day of focused work in a quiet members-only room. Coffee included.'},
+  {id:'sunrise',t:"Members' Sunrise Breakfast",d:lastWeekday(y,m,0),time:'7:30 AM',desc:'Small tables of eight members, rotating once. Leave with three new names.'}].map(o=>({...o,ym}))};
+ let y=p.y,m=p.m,opts=build(y,m).filter(o=>o.d>=today);if(opts.length<2){m++;if(m>12){m=1;y++}opts=build(y,m)}
+ return{ym:iso(y,m,1).slice(0,7),opts:opts.sort((a,b)=>a.d.localeCompare(b.d))}}
+
+/* ---- random member generator ---- */
+function genMember(id,seed,today,now=Date.now()){const r=mulberry32(seed),base=id.city||cityBy('BLR'),pool=NAMES[base.reg];
+ const name=pick(r,pool.f)+' '+pick(r,pool.l);
+ const old=id.prefix==='Y'?rint(r,18*366,23*365+300):rint(r,24*366,58*365+300);
+ const dob=addDays(today,-old),since=addDays(today,-rint(r,45,320)),phone=genPhone(r,base);
+ const pb=prevBirthday(dob,today),lock={lockedOn:pb>since?pb:since,unlockOn:upcomingBirthday(dob,today)};
+ /* spend: 60 days back, today left open */
+ const checkins=[];for(let i=60;i>=1;i--){if(r()<.12)continue;const date=addDays(today,-i);let amt=0,reason='',detail='',hi=false;
+  if(r()>=.28){const row=wpick(r,RW.map(x=>[x,x[1]])),inr=row[2]+(row[3]-row[2])*Math.pow(r(),1.6);hi=inr>(row[2]+row[3])/2;amt=niceAmt(inr/base.rate);reason=row[0];detail=r()<.7?pick(r,row[4]):''}
+  const mood=!amt?wpick(r,[['Needful',3],['Grateful',4],['Joyful',3],['Stressed',1]]):hi?wpick(r,[['Impulse',3],['Want Day',3],['Stressed',2],['Joyful',1]]):wpick(r,[['Needful',3],['Grateful',2],['Want Day',2],['Impulse',1],['Stressed',1],['Joyful',2]]);
+  checkins.push({id:'k'+i+'-'+seed,date,amt,reason,detail,mood,note:r()<.25?pick(r,DAYNOTES):'',ts:now-i*DAYMS})}
+ /* dreams: 14 nights in the last 24 days */
+ const ago=shuffle(r,Array.from({length:24},(_,i)=>i+1)).slice(0,14).sort((a,b)=>a-b),texts=shuffle(r,DREAM_TXT),dreams=[];
+ ago.forEach((a,i)=>{const date=addDays(today,-a),recall=i===3?'forgot':i===9?'no':'yes',dId='d'+(hashStr(seed+':'+i)).toString(36);
+  if(recall!=='yes'){dreams.push({id:dId,date,ts:now-a*DAYMS,recall,mood:'',text:'',summary:'',keywords:[],online:false,scans:0,matches:[]});return}
+  const[t0,txt]=texts.pop(),x={id:dId,date,ts:now-a*DAYMS,recall,mood:t0,text:txt,summary:summarize(txt),keywords:keywords(txt),online:r()<.62,scans:0,matches:[]};if(x.online)x.matches=scanDream(x,0);dreams.push(x)});
+ /* déjà vu */
+ const notes=shuffle(r,DV_NOTES),dejavu=[];for(let i=0;i<8;i++){const d=new Date(now);d.setDate(d.getDate()-rint(r,1,75));d.setHours(rint(r,7,23),rint(r,0,59),0,0);const g=jitter(r,base,.3,9);dejavu.push({id:'v'+i+'-'+seed,ts:d.getTime(),lat:g.lat,lon:g.lon,loc:'ok',intensity:rint(r,2,5),note:notes[i]})}
+ dejavu.sort((a,b)=>b.ts-a.ts);
+ return{v:2,id:id.raw,prefix:id.prefix,user:id.user,seed,cur:base.cur,
+  profile:{name,phone,email:id.user.toLowerCase()+'@ipnotec.vip',dob,since,city:base.code,cityTyped:id.city?id.cityCode:null},
+  contacts:genContacts(r,base,phone),lock,results:{},checkins,dreams,dejavu,rsvp:{},pick:null}}
+
+/* ---- self tests ---- */
+function tests(){const R=[],t=(n,c)=>R.push({name:n,ok:!!c});const T='2026-10-30',own='+91 91234 56780',dob='1990-05-15';
+ t('ID: IPO.BLR.1001 valid',parseID('IPO.BLR.1001').ok);t('ID: lower case accepted',parseID('ipo.blr.1001').ok);t('ID: airport alias LHR → London',parseID('IPW.LHR.NURSE24').city.name==='London');
+ t('ID: IPX.XXX.NEWBIE valid',parseID('IPX.XXX.NEWBIE').ok);t('ID: IPX with a city rejected',!parseID('IPX.BLR.NEWBIE').ok);t('ID: XXX without IPX rejected',!parseID('IPO.XXX.ABC').ok);
+ t('ID: unknown prefix rejected',!parseID('IPQ.BLR.1001').ok);t('ID: unknown city rejected',!parseID('IPO.QQQ.1001').ok);t('ID: 17-char username rejected',!parseID('IPO.BLR.ABCDEFGHIJKLMNOPQ').ok);
+ t('ID: 16-char username ok',parseID('IPO.BLR.ABCDEFGHIJKLMNOP').ok);t('ID: symbols rejected',!parseID('IPO.BLR.AB_1').ok);t('ID: two parts rejected',!parseID('IPO.BLR').ok);
+ t('phone formats normalize equal',normalizePhone('+91 98765-00001')===normalizePhone('09876500001'));t('short phone invalid',normalizePhone('12345')==='');
+ t('next birthday strictly after',nextBirthday(dob,'2026-05-15')==='2027-05-15');t('upcoming birthday includes today',upcomingBirthday(dob,'2026-05-15')==='2026-05-15');
+ t('leap birthday in non-leap year',nextBirthday('2000-02-29',T)==='2027-02-28'&&nextBirthday('2000-02-29','2027-10-30')==='2028-02-29');
+ const L={lockedOn:'2026-05-15',unlockOn:'2027-05-15'};t('state locked before birthday',lockState(L,'2027-05-14')==='locked');t('state reveal only on birthday',lockState(L,'2027-05-15')==='reveal');t('state expired after',lockState(L,'2027-05-16')==='expired');
+ const cs=[{id:'a',name:'A',phone:'+91 98765 00001',pri:1},{id:'b',name:'B',phone:'9876500002',pri:2},{id:'c',name:'C',phone:'9876500003',pri:3},{id:'d',name:'Same Name',phone:'9876500004',pri:1}];
+ const books={'9876500001':[{phone:'9123456780',pri:1}],'9876500002':[{phone:'091234 56780',pri:3}],'9876500003':[{phone:'9000000000',pri:3}],'9876500004':[{phone:'9999999999',pri:1}]};
+ const m=matchBirthday(cs,own,books);t('match: same priority + formatted phone',m.count===1&&m.matches[0].id==='a');t('match: different priority excluded',!m.matches.some(x=>x.id==='b'));t('match: by phone, never by name',!m.matches.some(x=>x.id==='d'||x.id==='c'));
+ const mem=genMember(parseID('IPY.DXB.ZARA21'),42,'2026-11-10',Date.UTC(2026,10,10,12));
+ t('member: 108 valid unique contacts',bookStats(mem.contacts,mem.profile.phone).valid===108);t('member: IPY age 18–23',ageOn(mem.profile.dob,'2026-11-10')>=18&&ageOn(mem.profile.dob,'2026-11-10')<=23);
+ t('member: phone uses city dial code',mem.profile.phone.startsWith('+971 '));t('member: lock ends on a birthday ≥ today',mem.lock.unlockOn>='2026-11-10'&&mem.lock.unlockOn.slice(5)===mem.profile.dob.slice(5));
+ t('member: today left open for check-in',!mem.checkins.some(e=>e.date==='2026-11-10'));t('member: currency from city',mem.cur==='AED');
+ t('member: dream matches valid',mem.dreams.every(d=>d.matches.every(x=>x.sharedCount>=2&&Math.abs(daysBetween(d.date,x.date))<=3)));
+ const c21=mem.contacts.slice(0,21),snap=JSON.stringify(c21),a=runBirthday({contacts:c21,ownPhone:own,seed:1}),a2=runBirthday({contacts:c21,ownPhone:own,seed:1});
+ t('simulation does not mutate book',JSON.stringify(c21)===snap);t('same seed repeatable',a.count===a2.count);t('hold=1,same=1 → all match',runBirthday({contacts:c21,ownPhone:own,seed:3,holdP:1,sameP:1}).count===21);t('hold=0 → none',runBirthday({contacts:c21,ownPhone:own,seed:3,holdP:0}).count===0);
+ t('stem flying→fly',stem('flying')==='fly');t('stem running→run',stem('running')==='run');t('stem cities→city',stem('cities')==='city');t('stem string kept',stem('string')==='string');
+ const dr={id:'x',date:T,recall:'yes',online:true,keywords:[{k:'fly',l:'flying'},{k:'ocean',l:'ocean'},{k:'city',l:'city'}]};
+ const pool=[{id:'a',handle:'A',date:'2026-10-31',words:['fly','ocean'],mood:'Joyful',summary:'s'},{id:'b',handle:'B',date:T,words:['fly'],mood:'Joyful',summary:'s'},{id:'c',handle:'C',date:'2026-11-05',words:['fly','ocean','city'],mood:'Joyful',summary:'s'},{id:'d',handle:'D',date:'2026-10-28',words:['ocean','city','fly'],mood:'Joyful',summary:'s'}];
+ t('dream: ≥2 shared & ±3 days, sorted',JSON.stringify(findMatches(dr,pool).map(x=>x.id))==='["d","a"]');t('dream: offline never matches',findMatches({...dr,online:false},pool).length===0);
+ t('validateDream: needs summary',!!validateDream({date:T,recall:'yes',mood:'Joyful',text:'x'.repeat(40),summary:''},T));t('validateDream: future date rejected',!!validateDream({date:'2026-11-01',recall:'no'},T));
+ t('sign Aries 03-21 / Pisces 03-20',signFor('1990-03-21').n==='Aries'&&signFor('1990-03-20').n==='Pisces');t('sign Capricorn wrap',signFor('1990-12-22').n==='Capricorn'&&signFor('1991-01-20').n==='Aquarius');
+ const mo=moonEvents('2026-11-01',30),fm=mo.find(x=>x.name==='Full moon'),nm=mo.find(x=>x.name==='New moon');
+ t('moon: full moon ≈ 24 Nov 2026',fm&&Math.abs(daysBetween('2026-11-24',fm.d))<=1);t('moon: new moon ≈ 9 Nov 2026',nm&&Math.abs(daysBetween('2026-11-09',nm.d))<=1);
+ t('3rd Sat Nov 2026 = 21st',nthWeekday(2026,11,6,3)==='2026-11-21');t('last Sun Nov 2026 = 29th',lastWeekday(2026,11,0)==='2026-11-29');
+ const mo1=monthlyOptions('2026-11-10','O');t('events: 4 November options from 10 Nov',mo1.ym==='2026-11'&&mo1.opts.length===4&&mo1.opts.every(o=>o.d>='2026-11-10'));t('events: rolls to December late in month',monthlyOptions('2026-11-28','O').ym==='2026-12');
+ t('checkin: 0 needs no reason',validateCheckin({amt:0,reason:'',mood:'Joyful'})==='');t('checkin: >0 needs reason',!!validateCheckin({amt:500,reason:'',mood:'Joyful'}));
+ const rs=rangeSummary([{date:'2026-10-01',amt:100,reason:'Shopping',mood:'Joyful'},{date:'2026-10-02',amt:300,reason:'Transport',mood:'Impulse'},{date:'2026-09-30',amt:999,reason:'Other',mood:'Joyful'}],'2026-10-01','2026-10-31');t('range summary',rs.total===400&&rs.days===2&&rs.topReason==='Transport');
+ t('geo: Bengaluru→Mysuru ≈ 125 km SW',(()=>{const g=geo(12.97,77.59,12.30,76.64);return g.km>110&&g.km<140&&g.dir==='SW'})());
+ return R}
+return{PERSONAS,CITIES,CITY_CODES,MOODS,CMOODS,REASONS,DV_NOTES,uid,parseISO,todayISO,isoOf,addDays,daysBetween,weekday,birthdayIn,upcomingBirthday,ageOn,msUntil,hashStr,mulberry32,cityBy,idSegments,parseID,normalizePhone,lockState,runBirthday,keywords,summarize,validateDream,scanDream,validateCheckin,rangeSummary,streak,insights,geo,jitter,signFor,moonEvents,moonNow,nthWeekday,nextWeekday,nextNthWeekday,nextLastWeekday,monthlyOptions,genMember,tests}})();
+</script>
+
+<!-- ======================= APP ======================= -->
+<script id="app">
+(()=>{'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const RM=()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}};
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],MONL=['January','February','March','April','May','June','July','August','September','October','November','December'],DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const fmtD=s=>{const p=IPC.parseISO(s);return p?`${p.d} ${MON[p.m-1]} ${p.y}`:'—'};
+const fmtDS=s=>{const p=IPC.parseISO(s);return p?`${p.d} ${MON[p.m-1]}`:'—'};
+const fmtDW=s=>{const p=IPC.parseISO(s);return p?`${DOW[IPC.weekday(s)]}, ${p.d} ${MON[p.m-1]} ${p.y}`:'—'};
+const hm=d=>String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const fmtT=ts=>{const d=new Date(ts);return `${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()} · ${hm(d)}`};
+const mask=p=>'•••• '+String(p).replace(/\D/g,'').slice(-4);
+const plural=(n,w)=>n+' '+w+(n===1?'':'s');
+const today=()=>IPC.todayISO();
+const KEY='ipnpc.v2';
+const DEMOS=['IPO.BLR.1001','IPV.AMS.1001','IPI.SFO.NOVA7','IPW.LHR.NURSE24','IPY.DXB.ZARA21','IPX.XXX.NEWBIE'];
+const RC={'Food & dining':'#FF6900','Shopping':'#B44DFF','Transport':'#00A8E8','Entertainment':'#FFD600','Health':'#39D353','Gifts & giving':'#FF4FA3','Unplanned bill':'#FF2828','Other':'#9B9B9B'};
+const MC={Needful:'#39D353',Grateful:'#00A8E8','Want Day':'#FFD600',Impulse:'#FF2828',Stressed:'#B44DFF',Joyful:'#FF8A3D'};
+const DMC={Frightened:'#FF6161',Inspiring:'#C470FF',Relaxed:'#5BE374',Joyful:'#FF8A3D',Sad:'#5AA9FF',Confusing:'#FFE04D',Exciting:'#3CC4F5',Neutral:'#C4C4C4'};
+
+/* ---------- state ---------- */
+let D=null,persistOK=true,NF=null,AUTH=null;
+const L={val:'',err:''};
+const newDraft=()=>({date:today(),recall:'',mood:'',text:'',summary:'',kw:null,online:false});
+const UI={};
+function resetUI(){Object.assign(UI,{app:null,msg:'',opener:null,focusT:false,ab:{filter:'all',q:'',view:'main',st:null},cer:null,ci:{range:30,reason:'',mood:'',init:0,del:null},dm:{tab:'journal',draft:newDraft(),view:'form',last:null,open:null,scan:false,del:null,dvLast:null},pf:{tests:null,reset:false}})}
+resetUI();
+let TM=[];const clearTM=()=>{TM.forEach(clearTimeout);TM=[]};const later=(f,ms)=>TM.push(setTimeout(f,ms));
+function save(){if(!D)return;try{localStorage.setItem(KEY,JSON.stringify(D));persistOK=true}catch(e){persistOK=false}}
+function loadSaved(){try{const o=JSON.parse(localStorage.getItem(KEY)||'null');return o&&o.v===2&&o.id&&o.profile?o:null}catch(e){return null}}
+function migrate(o){const t=today();if(o.lock&&t>o.lock.unlockOn)o.lock={lockedOn:o.lock.unlockOn,unlockOn:IPC.upcomingBirthday(o.profile.dob,t)};o.rsvp=o.rsvp||{};o.results=o.results||{};return o}
+const P=()=>IPC.PERSONAS[D.prefix],isX=()=>D.prefix==='X',C=()=>IPC.cityBy(D.profile.city)||IPC.cityBy('BLR');
+const cityLine=()=>isX()?'Not chosen yet':`${D.profile.cityTyped} · ${C().name}, ${C().country}`;
+const place=()=>isX()?'IPNOTEC HQ, Bengaluru':C().name;
+function money(v){if(!NF||NF.c!==D.cur){let f;try{f=new Intl.NumberFormat(D.cur==='INR'?'en-IN':'en-GB',{style:'currency',currency:D.cur,currencyDisplay:'narrowSymbol',maximumFractionDigits:0})}catch(e){try{f=new Intl.NumberFormat('en-GB',{style:'currency',currency:D.cur,maximumFractionDigits:0})}catch(e2){f={format:x=>D.cur+' '+Math.round(x).toLocaleString()}}}NF={c:D.cur,f}}return NF.f.format(Math.round(v))}
+function flash(m){UI.msg=m;const s=$('#st');if(s)s.textContent=m}
+function setAccent(k){const p=k?IPC.PERSONAS[k]:null,r=document.documentElement.style,c=p?p.c:'#EDEDED',m=/^#(..)(..)(..)$/.exec(c);
+ r.setProperty('--ac',c);r.setProperty('--ac-rgb',[1,2,3].map(i=>parseInt(m[i],16)).join(','));r.setProperty('--act',p?p.t:'#FFFFFF');r.setProperty('--on',p?p.on:'#000');document.body.classList.toggle('mono',!!(p&&p.mono))}
+function show(...ids){['boot','login','auth','desk','win','dock'].forEach(i=>{$('#'+i).hidden=!ids.includes(i)})}
+
+/* ---------- boot ---------- */
+let BT=[];
+function boot(){BT.forEach(clearTimeout);BT=[];clearTM();if(AUTH)cancelAnimationFrame(AUTH);AUTH=null;D=null;resetUI();setAccent(null);show('boot');$('#pcm').textContent='MODEL: IPV.BLR.BYB.001';
+ const steps=[[25,'Checking hardware components...'],[55,'Loading virtual environment...'],[80,'Opening IPNOTEC ID gateway...'],[100,'Ready.']];let i=0;$('#bf').style.width='0';
+ if(RM())return showLogin();
+ const nx=()=>{if(i<steps.length){$('#bf').style.width=steps[i][0]+'%';$('#bsx').textContent=steps[i][1];i++;BT.push(setTimeout(nx,330))}else BT.push(setTimeout(showLogin,300))};nx()}
+$('#boot').addEventListener('click',()=>{if(!$('#boot').hidden){BT.forEach(clearTimeout);showLogin()}});
+$('#pw').addEventListener('click',()=>{if(D)save();boot()});
+
+/* ---------- login ---------- */
+function segHTML(v){const s=IPC.idSegments(v),box=(h,x)=>`<div class="seg3 ${x.st}"><div class="h">${h}${x.st==='ok'?' ✓':x.st==='bad'?' ✕':''}</div><div class="v">${x.sw?`<span class="sw" style="background:${x.sw}"></span>`:''}<span>${esc(x.label)}</span></div></div>`;return box('PERSONA',s.p)+box('FUTURE CITY',s.c)+box('USERNAME',s.u)}
+function showLogin(){BT.forEach(clearTimeout);D=null;setAccent(null);show('login');rLogin();setTimeout(()=>$('#idin')?.focus(),30)}
+function rLogin(){const sv=loadSaved(),PS=IPC.PERSONAS;
+ $('#login').innerHTML=`<div class="lg"><h1>IPNOTEC</h1><div class="k">VIP VIRTUAL PC · MEMBER PREVIEW</div>
+ <div class="idbox"><label class="lab" for="idin">ENTER YOUR IPNOTEC ID</label>
+ <input id="idin" class="idin${L.err?' bad':''}" maxlength="24" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="IPO.BLR.1001" value="${esc(L.val)}" aria-describedby="lerr">
+ <div class="segs" id="segs">${segHTML(L.val)}</div>
+ <div class="err" id="lerr" role="alert">${esc(L.err)}</div>
+ <div class="row" style="margin-top:6px"><button class="btn wide" id="vbtn" data-a="verify">VERIFY ID ▸</button></div>
+ ${sv?`<div class="row"><button class="btn g wide" data-a="resume" data-v="${esc(sv.id)}">↺ CONTINUE AS ${esc(sv.id)}</button></div>`:''}
+ <div class="lab" style="margin-top:18px">${L.err?'OR USE A DEMO ID':'NO ID YET? TRY A DEMO ID'}</div>
+ <div class="chips">${DEMOS.map(d=>`<button class="chip" data-a="demo" data-v="${d}">${d}</button>`).join('')}</div>
+ <details class="leg"${L.err?' open':''}><summary>WHAT YOUR ID MEANS</summary>
+ <p class="legfmt"><code>IPO.BLR.1001</code> = persona colour <b>IPO</b> · Future City <b>BLR</b> (airport / city code) · username <b>1001</b> (3–16 letters or numbers).</p>
+ <div class="pl">${Object.entries(PS).map(([k,p])=>`<div><span class="sw" style="background:${p.sw}"></span><b>IP${k}</b><span>${esc(p.n.charAt(0)+p.n.slice(1).toLowerCase())} · ${esc(p.m)}</span></div>`).join('')}</div>
+ <p class="legfmt">Not decided yet? Use <code>IPX.XXX.YOURNAME</code>; IPX members see the PC in black and white until they choose.</p></details>
+ <p class="hint" style="margin-top:16px">Emulation: no real account is checked. After verification a random member profile is generated on this device to show what the app will hold.</p></div></div>`}
+function verify(){const r=IPC.parseID($('#idin').value);L.val=r.raw;
+ if(!r.ok){L.err=r.errors[0]||'That ID is not valid.';rLogin();const i=$('#idin');i.focus();try{i.setSelectionRange(i.value.length,i.value.length)}catch(e){}return}
+ L.err='';const b=$('#vbtn');b.disabled=true;b.textContent='CHECKING…';setTimeout(()=>startAuth(r),450)}
+
+/* ---------- 7-second verification ---------- */
+function startAuth(r){const sv=loadSaved();
+ if(sv&&sv.id===r.raw)D=migrate(sv);else{D=IPC.genMember(r,(Math.random()*4294967296)>>>0,today());save()}
+ resetUI();NF=null;setAccent(D.prefix);show('auth');
+ const c=C(),pp=P(),mo=IPC.monthlyOptions(today(),D.prefix),fn=D.profile.name.split(' ')[0].toUpperCase();
+ const lines=[`<b>&gt;</b> RESOLVING ${esc(D.id)}`,
+  `PERSONA ........... ${esc(pp.n)} · ${esc(pp.m.toUpperCase())} <em>✓</em>`,
+  `FUTURE CITY ....... ${isX()?'XXX · NOT CHOSEN YET':esc(D.profile.cityTyped+' · '+c.name.toUpperCase()+', '+c.country.toUpperCase())} <em>✓</em>`,
+  `USERNAME .......... ${esc(D.user)} <em>✓ VERIFIED ON NETWORK</em>`,
+  `MEMBERSHIP ........ JOIN THE REVOLUTION · ₹1,001/MO <em>ACTIVE</em>`,
+  `ADDRESS BOOK ...... ${D.contacts.length}/108 · LOCKED UNTIL ${fmtD(D.lock.unlockOn).toUpperCase()}`,
+  `DREAM MACHINE ..... ${D.dreams.length} DREAMS · ${D.dejavu.length} DÉJÀ VU`,
+  `SPEND LEDGER ...... ${D.checkins.length} DAYS SYNCED`,
+  `EVENTS ............ ${MONL[+mo.ym.slice(5)-1].toUpperCase()} PICK OPEN`,
+  `<em>WELCOME, ${esc(fn)}.</em>`];
+ $('#auth').innerHTML=`<div class="aw"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle id="rg" cx="60" cy="60" r="52" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="326.73"/></svg><div class="pct"><span id="rp">0%</span><small>VERIFYING</small></div></div>
+ <div><div class="lab">IPNOTEC ID VERIFIED</div><div class="aid">${esc(D.id)}</div><div class="alog" id="alog" aria-live="polite"></div>
+ <div class="row"><button class="btn g sm" data-a="skipAuth">SKIP ▸</button><span class="hint">Emulation · data generated on this device</span></div></div></div>`;
+ const a=$('#auth');a.classList.remove('run');void a.offsetWidth;a.classList.add('run');
+ const T0=performance.now(),DUR=7000,log=$('#alog'),rg=$('#rg'),rp=$('#rp');let shown=0;
+ const tick=()=>{const el=Math.min(DUR,performance.now()-T0),f=el/DUR;rg.style.strokeDashoffset=(326.73*(1-f)).toFixed(1);rp.textContent=Math.floor(f*100)+'%';
+  const want=Math.min(lines.length,Math.floor(el/(DUR/(lines.length+.4)))+1);while(shown<want){const d=document.createElement('div');d.innerHTML=lines[shown++];log.append(d)}
+  if(el<DUR)AUTH=requestAnimationFrame(tick);else{AUTH=null;$('.pct small',a).textContent='VERIFIED';later(enterDesk,300)}};
+ AUTH=requestAnimationFrame(tick)}
+function enterDesk(){if(AUTH)cancelAnimationFrame(AUTH);AUTH=null;clearTM();show('desk','dock');$('#pcm').textContent='SIGNED IN · '+D.id+' · EMULATION';rDesk();$('#desk').scrollTop=0}
+
+/* ---------- shared computations ---------- */
+function pickNow(){const mo=IPC.monthlyOptions(today(),D.prefix),k=D.pick&&D.pick.ym===mo.ym?D.pick:null;return{...mo,pick:k?(mo.opts.find(o=>o.id===k.id)||k):null}}
+function renewal(){const s=IPC.parseISO(D.profile.since),t=IPC.parseISO(today());let y=t.y,m=t.m;const day=x=>Math.min(s.d,new Date(Date.UTC(y,x,0)).getUTCDate());let r=`${y}-${String(m).padStart(2,'0')}-${String(day(m)).padStart(2,'0')}`;if(r<=today()){m++;if(m>12){m=1;y++}r=`${y}-${String(m).padStart(2,'0')}-${String(day(m)).padStart(2,'0')}`}return r}
+function benefits(){const t=today(),mp=pickNow(),s=IPC.rangeSummary(D.checkins,IPC.addDays(t,-29),t),ym=t.slice(0,7),dm=D.dreams.filter(x=>x.date.startsWith(ym)),fd=dm.reduce((a,x)=>a+(x.online?x.matches.length:0),0),ar=Object.keys(D.rsvp).filter(k=>k.startsWith('astro:')).length,logged=D.checkins.some(e=>e.date===t);
+ return[{app:'ev',t:'1 included IPNOTEC event',d:mp.pick?`${mp.pick.t} · ${fmtDS(mp.pick.d)}`:`Choose your ${MONL[+mp.ym.slice(5)-1]} event`,done:!!mp.pick},
+  {app:'ab',t:'VIP Address Book',d:`108 locked · reveal on ${fmtDS(D.lock.unlockOn)}`,done:true},
+  {app:'ci',t:'Spend dashboard',d:logged?`Today logged · ${s.days}/30 days`:`${s.days}/30 days logged · today pending`,done:logged},
+  {app:'dm',t:'Dream Machine',d:`${plural(dm.length,'dream')} this month · ${plural(fd,'fellow dreamer')}`,done:dm.length>0},
+  {app:'as',t:'Astro activities',d:ar?`${ar} booked`:'Moon-calendar sessions open',done:ar>0},
+  {app:'pf',t:'Spam-free intranet email',d:D.profile.email,done:true}]}
+
+/* ---------- desktop ---------- */
+const APPS=[['home','HOME'],['ab','ADDRESS BOOK'],['ci','SPEND'],['dm','DREAMS'],['as','ASTROLOGY'],['ev','EVENTS'],['pf','PROFILE']];
+function rDesk(){const t=today(),pp=P(),Lk=D.lock,st=IPC.lockState(Lk,t),dl=IPC.daysBetween(t,Lk.unlockOn),s=IPC.rangeSummary(D.checkins,IPC.addDays(t,-29),t),on=D.dreams.filter(x=>x.online),fd=on.reduce((a,x)=>a+x.matches.length,0),sg=IPC.signFor(D.profile.dob),fm=IPC.moonEvents(t,35).find(x=>x.name==='Full moon'),mp=pickNow(),first=D.profile.name.split(' ')[0],logged=D.checkins.some(e=>e.date===t),lastDv=D.dejavu[0];
+ $('#desk').innerHTML=`<div class="dw">
+ <div class="top"><div class="logo"><h1>IPNOTEC<span>PC</span></h1><div class="tag">STEP INTO THE FUTURE</div></div>
+  <div class="who"><div class="hi">Welcome, ${esc(first)}</div><div class="idl">${esc(D.id)}</div><span class="pchip"><span class="sw" style="background:${pp.sw}"></span>${esc(pp.n)} · ${esc(pp.m)}</span></div></div>
+ <button class="hero${st==='reveal'?' on':''}" data-a="open" data-app="ab"><span class="hic">🎂</span>
+  <span class="hx"><span class="ht">VIP ADDRESS BOOK · ${D.contacts.length}/108 · LOCKED</span>
+  <span class="hb">${st==='reveal'?'It’s your birthday. Your Life Priority Match is <b>open today</b>.':`Your match reveal opens <b>only on your birthday</b>: ${fmtDW(Lk.unlockOn)}`}</span>
+  <span class="hs">See who placed you at the same priority you placed them: P1↔P1, P2↔P2, P3↔P3.</span></span>
+  <span class="hcd">${st==='reveal'?'<b>TODAY</b><small>OPEN NOW</small>':`<b>${dl}</b><small>DAYS TO GO</small>`}</span></button>
+ <div class="tiles">
+  <button class="tile" data-a="open" data-app="ci"><span class="th"><i>◐</i>SPEND DASHBOARD</span><span class="tb">${money(s.total)}</span><small>extra in the last 30 days · ${s.days} days logged<br>${logged?'<span style="color:var(--good)">✓ Today logged</span>':'○ Today not logged yet'}</small></button>
+  <button class="tile" data-a="open" data-app="dm"><span class="th"><i>☾</i>DREAM MACHINE</span><span class="tb">${plural(D.dreams.length,'dream')}</span><small>${on.length} online · ${plural(fd,'fellow dreamer')} connected</small></button>
+  <button class="tile" data-a="open" data-app="dm" data-tab="dejavu"><span class="th"><i>◉</i>DÉJÀ VU</span><span class="tb">${plural(D.dejavu.length,'capture')}</span><small>${lastDv?'Last: '+fmtT(lastDv.ts):'Capture the moment it happens'}</small></button>
+  <button class="tile" data-a="open" data-app="as"><span class="th"><i>★</i>ASTROLOGY</span><span class="tb">${sg.g} ${esc(sg.n)}</span><small>${fm?'Full moon '+fmtDS(fm.d)+' · ':''}astro activities to attend</small></button>
+  <button class="tile" data-a="open" data-app="ev"><span class="th"><i>◆</i>EVENTS</span><span class="tb">${mp.pick?'✓ BOOKED':'CHOOSE 1'}</span><small>${mp.pick?esc(mp.pick.t)+' · '+fmtDS(mp.pick.d):'Your included '+MONL[+mp.ym.slice(5)-1]+' event is waiting'}</small></button>
+  <button class="tile" data-a="open" data-app="pf"><span class="th"><i>⚙</i>PROFILE</span><span class="tb">₹1,001 / mo</span><small>Member since ${fmtDS(D.profile.since)} · renews ${fmtDS(renewal())}</small></button></div>
+ <div class="card"><div class="st">YOUR ₹1,001 THIS MONTH</div><div class="bl6">${benefits().map(b=>`<button class="bn${b.done?' ok':''}" data-a="open" data-app="${b.app}"><span>${b.done?'✓':'○'}</span><span style="color:inherit;font-weight:500;font-size:1rem"><b>${esc(b.t)}</b><small>${esc(b.d)}</small></span></button>`).join('')}</div></div>
+ <div class="term"><div class="tt"><i style="background:#FF5F56"></i><i style="background:#FFBD2E"></i><i style="background:#27C93F"></i><span>IPNOTEC TERMINAL v5.0</span></div><pre><b>&gt;</b> STATUS ${esc(D.id)}
+ADDRESS BOOK ....... ${D.contacts.length}/108 · ${st==='reveal'?'<em>REVEAL OPEN TODAY</em>':'LOCKED UNTIL '+fmtD(Lk.unlockOn).toUpperCase()}
+DREAM JOURNAL ...... ${D.dreams.length} dreams · ${on.length} online · ${D.dejavu.length} déjà vu
+SPEND LEDGER ....... ${s.days} of last 30 days logged
+FUTURE CITY ........ ${esc(cityLine().toUpperCase())}
+MODE ............... <em>EMULATION PREVIEW · APP COMING SOON</em></pre></div>
+ <div class="url"><span>WWW.IPNOTEC.VIP</span><span>${esc(D.profile.email.toUpperCase())}</span></div></div>`;
+ rDock()}
+function rDock(){const t=today(),dot=!D.checkins.some(e=>e.date===t)&&new Date().getHours()>=19;
+ $('#dock').innerHTML=APPS.map(([k,l])=>{const act=(UI.app||'home')===k;return `<button class="tab${act?' act':''}${k==='ci'&&dot?' rem':''}" data-a="${k==='home'?'close':'open'}" data-app="${k}"${act?' aria-current="page"':''}>${l}</button>`}).join('')+`<button class="tab out" data-a="signout">⏻ SIGN OUT</button>`}
+
+/* ---------- window shell ---------- */
+const TITLES={ab:['VIP ADDRESS BOOK — YOUR 108',()=>rAB()],ci:['SPEND DASHBOARD — EXTRA SPEND & MOOD',()=>rCI()],dm:['DREAM MACHINE',()=>rDM()],as:['ASTROLOGY — SUN SIGN & MOON CALENDAR',()=>rAS()],ev:['IPNOTEC EVENTS',()=>rEV()],pf:['PROFILE & MEMBERSHIP',()=>rPF()]};
+let lastApp=null;
+function render(){const w=$('#win');$('#desk').style.visibility=UI.app?'hidden':'';if(!UI.app){w.hidden=true;w.innerHTML='';rDock();return}
+ const ae=document.activeElement,id=ae&&ae.id,ss=ae&&ae.selectionStart,se=ae&&ae.selectionEnd,sc=lastApp===UI.app?($('.wbody',w)?.scrollTop||0):0,T=TITLES[UI.app];
+ w.hidden=false;w.innerHTML=`<div class="wh"><h2 id="wt" tabindex="-1">${T[0]}</h2><span class="idt">${esc(D.id)}</span><button class="x" data-a="close" aria-label="Close window">✕</button></div><div class="wbody">${T[1]()}</div><div class="status" id="st" role="status" aria-live="polite">${esc(UI.msg||'')}</div>`;
+ $('.wbody',w).scrollTop=sc;lastApp=UI.app;rDock();
+ if(UI.focusT){UI.focusT=false;$('#wt').focus()}else if(id){const n=document.getElementById(id);if(n&&n!==document.activeElement){n.focus();try{if(ss!=null)n.setSelectionRange(ss,se)}catch(e){}}}}
+
+/* ---------- ADDRESS BOOK ---------- */
+function cdText(){const ms=Math.max(0,IPC.msUntil(D.lock.unlockOn)),d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4),s=Math.floor(ms%6e4/1e3),p=n=>String(n).padStart(2,'0');return `${d}d ${p(h)}h ${p(m)}m ${p(s)}s`}
+function rAB(){if(UI.ab.view==='cer')return rCer();
+ const t=today(),Lk=D.lock,st=IPC.lockState(Lk,t),cs=D.contacts,q=UI.ab.q.toLowerCase().trim(),qd=q.replace(/\D/g,''),f=UI.ab.filter;UI.ab.st=st;
+ const list=cs.filter(c=>(f==='all'||(f.length===1?c.pri===+f:c.cat===f))&&(!q||c.name.toLowerCase().includes(q)||(qd.length>=3&&c.phone.replace(/\D/g,'').includes(qd)))).sort((a,b)=>a.pri-b.pri||a.name.localeCompare(b.name));
+ const n=p=>cs.filter(c=>c.pri===p).length;
+ const side=`<div class="side"><div class="card bday${st==='reveal'?' on':''}"><div class="cake">🎂</div><div class="st" style="margin:4px 0">LIFE PRIORITY MATCH</div>
+  <p class="big">${st==='reveal'?'It’s your birthday. Your reveal is open.':'Opens only on your birthday'}</p><div class="bdate">${fmtDW(Lk.unlockOn).toUpperCase()}</div>
+  ${st==='locked'?`<div class="cd" id="cd" aria-label="Time until reveal">${cdText()}</div>`:''}
+  <p class="sub small">Book locked on ${fmtD(Lk.lockedOn)}. All 108 numbers and priorities stay frozen until the reveal.</p>
+  <div class="row">${st==='reveal'?`<button class="btn wide" data-a="cerReal">REVEAL MY MATCHES</button>`:`<button class="btn g wide" data-a="cerPrev">✦ PREVIEW MY BIRTHDAY (DEMO)</button>`}</div>
+  ${st==='reveal'?'':`<p class="hint">Demo only: plays the reveal with a simulated network. Your real reveal opens on ${fmtDS(Lk.unlockOn)}.</p>`}</div>
+  <div class="card"><div class="st">HOW A MATCH WORKS</div><ol class="steps"><li>You place your 108 people at <b>P1</b>, <b>P2</b> or <b>P3</b>.</li><li>Each of them builds their own IPNOTEC book.</li><li>On your birthday you see who placed <b>you</b> at the <b>same</b> priority, matched by phone number, never by name.</li><li>After the reveal you can rebuild your book for the next year.</li></ol></div>
+  <div class="card"><div class="st">PRIORITY GUIDE</div><div class="kv"><span>P1 · Inner circle</span><b>${n(1)} people</b></div><div class="kv"><span>P2 · Close circle</span><b>${n(2)} people</b></div><div class="kv"><span>P3 · Extended</span><b>${n(3)} people</b></div></div></div>`;
+ const cards=list.map(c=>`<div class="cc p${c.pri}"><span class="pb">P${c.pri}</span><b>${esc(c.name)}</b><small>☏ ${esc(c.phone)}</small>${c.email?`<small>✉ ${esc(c.email)}</small>`:''}<span class="ct">${esc(c.cat)}</span></div>`).join('')||'<p class="empty">No contacts match this search.</p>';
+ return `<div class="split">${side}<div>
+ <div class="kpis"><div class="kpi"><span>TOTAL</span><b>${cs.length}<small>/108</small></b><small>book full</small></div><div class="kpi"><span>P1 · INNER</span><b>${n(1)}</b><small>daily essentials</small></div><div class="kpi"><span>P2 · CLOSE</span><b>${n(2)}</b><small>regular touchpoints</small></div><div class="kpi"><span>P3 · EXTENDED</span><b>${n(3)}</b><small>wider network</small></div></div>
+ <div class="frz">🔒 <span>Book is <b style="color:#fff">locked</b>. Adding, editing and removing reopen after the reveal on ${fmtD(Lk.unlockOn)}.</span></div>
+ <div class="tools" style="margin-top:12px"><input id="ab-q" placeholder="Search name or number" aria-label="Search contacts" value="${esc(UI.ab.q)}"><span class="hint">${list.length} shown</span></div>
+ <div class="chips">${[['all','ALL'],['1','P1'],['2','P2'],['3','P3'],['family','FAMILY'],['friends','FRIENDS'],['professional','WORK'],['mentor','MENTORS'],['other','OTHER']].map(([v,l])=>`<button class="chip" data-a="abFilter" data-v="${v}" aria-pressed="${f===v}">${l}</button>`).join('')}</div>
+ <div class="cg">${cards}</div></div></div>`}
+function rCer(){const c=UI.cer,r=c.res,real=c.mode==='real';
+ const hd=`<div class="note"><b>${real?'BIRTHDAY RESULT · SIMULATED NETWORK':'PREVIEW · DEMO OF YOUR BIRTHDAY REVEAL'}</b>: generated on this device from simulated contact books. These are not real answers from your contacts; live matching arrives with the app.</div>`;let body;
+ if(c.stage==='seal')body=`<div class="seal"><div class="rg"></div><div class="sg">◈</div></div><p class="cer-t">YOUR BOOK IS SEALED</p><p class="sub">${r.total} contacts · comparing numbers and priorities…</p>`;
+ else if(c.stage==='count')body=`<div class="seal"><div class="rg"></div><div class="sg">${c.n}</div></div><p class="cer-t">OPENING THE SEAL</p>`;
+ else{let base=0;const G=[[1,'PRIORITY 1 · INNER CIRCLE','var(--act)'],[2,'PRIORITY 2 · CLOSE CIRCLE','#C4C4C4'],[3,'PRIORITY 3 · EXTENDED','#fff']];
+  const groups=G.map(([p,l,col])=>{const a=r.by[p],d0=base;base+=a.length?600+a.length*90:300;return `<div class="grp" style="--c:${col};--d:${d0}ms"><h3>${l} · ${a.length} MUTUAL</h3>${a.length?a.map((x,i)=>`<span class="nm" style="--c:${col};--d:${d0+500+i*90}ms">${esc(x.name)}<small>${mask(x.phone)}</small></span>`).join(''):'<p class="sub" style="margin-top:6px">No one at this priority.</p>'}</div>`}).join('');
+  c.total=base+800;body=`<p class="cer-t" style="margin:14px 0 6px">${r.count} OF ${r.total} CONTACTS MATCHED</p><p class="sub">A match means their book holds your number at the same priority you gave them.</p>${groups}`}
+ return `<div class="cev${c.static?' static':''}${c.stage==='reveal'&&!c.static&&!c.done?' hold':''}" id="cev">${hd}${body}<div class="row acts" style="justify-content:center">${c.stage==='reveal'?`<button class="btn g" data-a="cerReplay">↺ REPLAY</button>`:`<button class="btn g" data-a="cerSkip">SKIP ▸</button>`}${!real&&c.stage==='reveal'?`<button class="btn" data-a="cerAgain">NEW SIMULATION</button>`:''}${c.stage==='reveal'?`<button class="btn g" data-a="cerClose">BACK TO BOOK</button>`:''}</div></div>`}
+function startCer(mode){clearTM();let res;
+ if(mode==='real'){const Lk=D.lock;res=D.results[Lk.unlockOn];if(!res){res=IPC.runBirthday({contacts:D.contacts,ownPhone:D.profile.phone,seed:IPC.hashStr(Lk.lockedOn+IPC.normalizePhone(D.profile.phone)+Lk.unlockOn)});D.results[Lk.unlockOn]=res;save()}}
+ else res=IPC.runBirthday({contacts:D.contacts,ownPhone:D.profile.phone});
+ UI.cer={mode,res,stage:'seal',n:3,done:false,static:false};UI.ab.view='cer';playCer()}
+function playCer(){clearTM();const c=UI.cer;c.done=false;if(RM()){c.stage='reveal';c.static=true;render();return}
+ c.static=false;c.stage='seal';render();later(()=>{c.stage='count';c.n=3;render();later(()=>{c.n=2;render()},900);later(()=>{c.n=1;render()},1800);later(()=>{c.stage='reveal';render();later(()=>{c.done=true;$('#cev')?.classList.remove('hold')},c.total||2500)},2700)},1800)}
+
+/* ---------- SPEND DASHBOARD ---------- */
+function donut(by,total){const r=62,C2=2*Math.PI*r;let off=0;
+ const segs=by.map(([k,v])=>{const len=v/total*C2,s=`<circle r="${r}" cx="90" cy="90" fill="none" stroke="${RC[k]||'#888'}" stroke-width="28" stroke-dasharray="${Math.max(0,len-1.5).toFixed(2)} ${(C2-Math.max(0,len-1.5)).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}"><title>${esc(k)}: ${money(v)}</title></circle>`;off+=len;return s}).join('');
+ return `<div class="dpie"><svg viewBox="0 0 180 180" role="img" aria-label="Extra spend by reason"><g transform="rotate(-90 90 90)"><circle r="${r}" cx="90" cy="90" fill="none" stroke="#1c1c1c" stroke-width="28"/>${total?segs:''}</g></svg><div class="dc"><b>${money(total)}</b><small>EXTRA</small></div></div>`}
+function barsHTML(from,n){const map={};D.checkins.forEach(e=>map[e.date]=e);const arr=[];for(let i=0;i<n;i++){const d=IPC.addDays(from,i);arr.push({d,e:map[d]})}const mx=Math.max(1,...arr.map(x=>x.e?x.e.amt:0));
+ return `<div class="bars" role="img" aria-label="Daily extra spend, coloured by mood">${arr.map(x=>x.e?`<div class="bc" title="${fmtDS(x.d)} · ${x.e.amt?esc(money(x.e.amt)+' · '+x.e.reason):'no extra'} · ${esc(x.e.mood)}"><i style="height:${x.e.amt?Math.max(4,x.e.amt/mx*100):2}%;background:${x.e.amt?MC[x.e.mood]:'rgba(255,255,255,.4)'}"></i></div>`:`<div class="bc miss" title="${fmtDS(x.d)} · not logged"><i></i></div>`).join('')}</div>
+ <div class="bx"><span>${fmtDS(from)}</span><span>${fmtDS(IPC.addDays(from,Math.floor(n/2)))}</span><span>${fmtDS(IPC.addDays(from,n-1))}</span></div>
+ <div class="lg3">${Object.entries(MC).map(([k,v])=>`<span><i style="background:${v}"></i>${k}</span>`).join('')}<span><i style="background:rgba(255,255,255,.18)"></i>Not logged</span></div>`}
+function insightText(i){switch(i.k){case 'top':return `<b>${esc(i.reason)}</b> is ${i.pct}% of your extra spend in this period.`;
+ case 'impulse':return i.x>=1?`On <b>Impulse / Want</b> days you spent <b>${i.x}×</b> what you spent on other days (${plural(i.n,'day')}).`:`Impulse / Want days cost <b>less</b> than your other days (${i.x}×).`;
+ case 'big':return `Biggest day: <b>${fmtDW(i.e.date)}</b>, ${money(i.e.amt)} on ${esc(i.e.reason)}${i.e.detail?' ('+esc(i.e.detail)+')':''}.`;
+ case 'weekend':return i.x>=1?`Weekends cost <b>${i.x}×</b> your weekday average.`:`Weekdays cost more than weekends (weekend = ${i.x}× weekday).`;
+ case 'zero':return `<b>${i.n}</b> of ${i.days} logged days had no extra spend.`}return ''}
+function rCI(){const t=today(),rg=UI.ci.range,from=IPC.addDays(t,-(rg-1)),s=IPC.rangeSummary(D.checkins,from,t),p=IPC.rangeSummary(D.checkins,IPC.addDays(from,-rg),IPC.addDays(from,-1)),dl=p.days>=Math.min(5,rg)&&p.total?Math.round((s.total-p.total)/p.total*100):null,e=D.checkins.find(x=>x.date===t),dr=UI.ci,stk=IPC.streak(D.checkins,t);
+ if(!dr.init){dr.init=1;dr.reason=e?.reason||'';dr.mood=e?.mood||'';dr.amt=e?String(e.amt):'';dr.detail=e?.detail||'';dr.note=e?.note||''}
+ const form=`<div class="side"><div class="card hl"><div class="st">TODAY · ${fmtDW(t).toUpperCase()}</div><p class="sub small">${e?'Logged. You can update it until midnight.':'One short entry at the end of the day.'}</p>
+ <label class="lab" for="ci-amt">EXTRA SPENT TODAY (${esc(D.cur)}) *</label><input id="ci-amt" type="number" min="0" step="any" inputmode="decimal" placeholder="0 if nothing extra" value="${esc(dr.amt)}"><p class="hint">Anything beyond your regular, planned spending.</p>
+ <div class="lab">WHAT WAS IT FOR?</div><div class="chips">${IPC.REASONS.map(r=>`<button class="chip" data-a="ciReason" data-v="${esc(r)}" aria-pressed="${dr.reason===r}"><span class="dot" style="background:${RC[r]}"></span>${esc(r)}</button>`).join('')}</div>
+ <label class="lab" for="ci-detail">DETAIL (OPTIONAL)</label><input id="ci-detail" maxlength="80" value="${esc(dr.detail)}">
+ <div class="lab">HOW WAS TODAY? *</div><div class="chips">${IPC.CMOODS.map(m=>`<button class="chip" data-a="ciMood" data-v="${esc(m)}" aria-pressed="${dr.mood===m}"><span class="dot" style="background:${MC[m]}"></span>${esc(m)}</button>`).join('')}</div>
+ <label class="lab" for="ci-note">ONE LINE ABOUT THE DAY (OPTIONAL)</label><input id="ci-note" maxlength="120" value="${esc(dr.note)}">
+ <div class="row"><button class="btn wide" data-a="ciSave">${e?'UPDATE TODAY':'SAVE TODAY'}</button></div></div><p class="hint">Private to you. In the app this stays on your phone.</p></div>`;
+ const kp=`<div class="kpis"><div class="kpi"><span>EXTRA · ${rg} DAYS</span><b>${money(s.total)}</b><small class="${dl==null?'':dl>0?'up':'down'}">${dl==null?'no earlier data to compare':(dl>0?'▲ ':'▼ ')+Math.abs(dl)+'% vs previous '+rg+' days'}</small></div>
+ <div class="kpi"><span>DAYS LOGGED</span><b>${s.days}<small>/${rg}</small></b><small>${plural(stk,'day')} streak</small></div>
+ <div class="kpi"><span>AVERAGE / DAY</span><b>${money(s.avg)}</b><small>across logged days</small></div>
+ <div class="kpi"><span>ZERO-EXTRA DAYS</span><b>${s.zero}</b><small>${s.days?Math.round(s.zero/s.days*100):0}% of logged days</small></div></div>`;
+ const leg=s.by.map(([k,v])=>`<div><i style="background:${RC[k]}"></i><span>${esc(k)}</span><em>${Math.round(v/s.total*100)}%</em><b>${money(v)}</b></div>`).join('')||'<p class="sub">No extra spend in this period.</p>';
+ const mm=Math.max(1,...IPC.CMOODS.map(m=>s.mood[m]?.n||0));
+ const moods=IPC.CMOODS.map(m=>{const o=s.mood[m]||{n:0,amt:0};return `<div class="mrow"><span>${m}</span><div><i style="width:${o.n/mm*100}%;background:${MC[m]}"></i></div><b style="text-align:right">${o.n}</b><em>${o.n?money(o.amt/o.n):'—'}</em></div>`}).join('');
+ const rows=[...s.entries].sort((a,b)=>b.date.localeCompare(a.date));
+ const tbl=`<div class="tscroll"><table class="tbl"><thead><tr><th>DATE</th><th>EXTRA</th><th>REASON</th><th>DAY</th><th></th></tr></thead><tbody>${rows.map(h=>`<tr><td>${fmtDS(h.date)} <span class="hint">${DOW[IPC.weekday(h.date)]}</span></td><td style="color:var(--act);font-weight:700">${h.amt?money(h.amt):'—'}</td><td>${h.amt?`<span class="dot" style="background:${RC[h.reason]}"></span> ${esc(h.reason)}${h.detail?`<div class="hint">${esc(h.detail)}</div>`:''}`:'<span class="hint">none</span>'}${h.note?`<div class="hint">“${esc(h.note)}”</div>`:''}</td><td><span class="badge" style="--c:${MC[h.mood]}">${esc(h.mood)}</span></td><td>${UI.ci.del===h.id?`<button class="btn d sm" data-a="ciDelYes" data-id="${h.id}">DELETE</button> <button class="btn g sm" data-a="ciDelNo">KEEP</button>`:`<button class="btn g sm" data-a="ciDel" data-id="${h.id}" aria-label="Delete entry for ${fmtDS(h.date)}">✕</button>`}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No entries in this period.</td></tr>'}</tbody></table></div>`;
+ return `<div class="split">${form}<div>
+ <div class="yours"><div class="st" style="margin:0">PREMIUM SPEND DASHBOARD</div><div class="seg" role="group" aria-label="Period">${[7,30,60].map(n=>`<button data-a="ciRange" data-v="${n}" aria-pressed="${rg===n}">${n}D</button>`).join('')}</div></div>
+ ${kp}
+ <div class="gr2"><div class="card"><div class="st">WHERE THE EXTRA WENT</div><div class="dwrap">${donut(s.by,s.total)}<div class="leg2">${leg}</div></div></div>
+ <div class="card"><div class="st">MOOD vs SPEND</div><div class="mrow hint" style="padding-top:0"><span>MOOD</span><span></span><span style="text-align:right">DAYS</span><span style="text-align:right">AVG / DAY</span></div>${moods}</div></div>
+ <div class="card"><div class="st">DAILY EXTRA · LAST ${rg} DAYS</div>${barsHTML(from,rg)}</div>
+ <div class="card"><div class="st">INSIGHTS</div><ul class="ins">${IPC.insights(s).map(i=>`<li>${insightText(i)}</li>`).join('')||'<li>Log a few days to see patterns.</li>'}</ul></div>
+ <div class="card"><div class="st">HISTORY · ${plural(rows.length,'ENTRY').toUpperCase().replace('ENTRYS','ENTRIES')}</div>${tbl}</div></div></div>`}
+
+/* ---------- DREAM MACHINE ---------- */
+const mCards=a=>a.map(m=>`<div class="mcard"><div class="h"><span>${esc(m.handle)}</span><span>${fmtD(m.date)}</span><span class="badge sim">SIMULATED</span><span>${esc(m.mood)}</span></div><div class="chips" style="margin-top:6px">${m.shared.map(k=>`<span class="chip k">${esc(k)}</span>`).join('')}</div><p>${esc(m.summary)}</p></div>`).join('');
+function rDM(){const d=UI.dm,tabs=[['journal','JOURNAL'],['morning','LOG A DREAM'],['dejavu','DÉJÀ VU']];
+ return `<div class="subtabs" role="tablist">${tabs.map(([k,l])=>`<button role="tab" data-a="dmTab" data-v="${k}" aria-pressed="${d.tab===k}" aria-selected="${d.tab===k}">${l}</button>`).join('')}</div>${d.tab==='morning'?rMorning():d.tab==='journal'?rJournal():rDV()}`}
+function rJournal(){const d=UI.dm,t=today();
+ if(d.open){const x=D.dreams.find(z=>z.id===d.open);if(!x){d.open=null;return rJournal()}
+  return `<div class="row" style="margin-top:0;margin-bottom:12px"><button class="btn g" data-a="dmBack">← BACK TO JOURNAL</button></div>
+  <div class="split"><div class="side"><div class="card hl"><div class="st">${fmtDW(x.date).toUpperCase()}</div><div class="dh">${x.recall==='yes'?`<span class="badge" style="--c:${DMC[x.mood]}">${esc(x.mood)}</span>`:`<span class="badge mute">${x.recall==='no'?'NOT REMEMBERED':'DREAMT · FORGOT'}</span>`}${x.recall==='yes'?(x.online?'<span class="badge on">● ONLINE</span>':'<span class="badge off">○ OFFLINE</span>'):''}</div>
+  ${x.recall==='yes'?`<div class="lab">VISIBILITY</div><div class="seg" role="group"><button data-a="dmVis" data-id="${x.id}" data-v="1" aria-pressed="${x.online}">ONLINE</button><button data-a="dmVis" data-id="${x.id}" data-v="0" aria-pressed="${!x.online}">OFFLINE</button></div><p class="hint">${x.online?'Only the summary keywords and date are compared with other dreamers. The full text is never shared.':'Stays on this device. Takes no part in matching.'}</p>${x.online?`<div class="row"><button class="btn g" data-a="dmRescan" data-id="${x.id}">↻ RE-SCAN DREAMERS</button></div>`:''}`:''}
+  <div class="row">${d.del===x.id?`<button class="btn d" data-a="dmDelYes" data-id="${x.id}">CONFIRM DELETE</button><button class="btn g" data-a="dmDelNo">KEEP</button>`:`<button class="btn g sm" data-a="dmDel" data-id="${x.id}">Delete entry</button>`}</div></div></div>
+  <div>${x.recall==='yes'?`<div class="card"><div class="st">SUMMARY</div><p>${esc(x.summary)}</p><div class="chips" style="margin-top:10px">${x.keywords.map(k=>`<span class="chip k">${esc(k.l)}</span>`).join('')}</div></div><div class="card"><div class="st">FULL DREAM</div><p style="white-space:pre-wrap">${esc(x.text)}</p></div>
+  ${x.online?`<div class="st">FELLOW DREAMERS · ${x.matches.length}</div><div class="note">Simulated for this preview. A match needs at least 2 shared keywords and a dream date within ±3 days.</div>${mCards(x.matches)||'<p class="sub">No dreamers share enough keywords with this dream right now.</p>'}`:''}`:'<div class="card"><p class="sub">No dream text for this night. Logging “not remembered” nights still shows your recall pattern over time.</p></div>'}</div></div>`}
+ const l30=D.dreams.filter(x=>{const g=IPC.daysBetween(x.date,t);return g>=0&&g<30}),rem=l30.filter(x=>x.recall==='yes').length,on=D.dreams.filter(x=>x.online),fd=on.reduce((a,x)=>a+x.matches.length,0),off=D.dreams.filter(x=>x.recall==='yes'&&!x.online).length;
+ const rows=[...D.dreams].sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);
+ return `<div class="kpis"><div class="kpi"><span>DREAMS LOGGED</span><b>${D.dreams.length}</b><small>${rem}/${l30.length} remembered · 30 days</small></div><div class="kpi"><span>ONLINE</span><b>${on.length}</b><small>shared as keywords only</small></div><div class="kpi"><span>OFFLINE</span><b>${off}</b><small>private to this device</small></div><div class="kpi"><span>FELLOW DREAMERS</span><b>${fd}</b><small>connected across online dreams</small></div></div>
+ <div class="dl">${rows.map(x=>{const p=IPC.parseISO(x.date);return `<button class="dr" data-a="dmOpen" data-id="${x.id}"><span class="dd"><b>${p.d}</b><small>${MON[p.m-1].toUpperCase()}</small></span><span><span class="dh">${x.recall==='yes'?`<span class="badge" style="--c:${DMC[x.mood]}">${esc(x.mood)}</span>${x.online?`<span class="badge on">● ONLINE</span><span class="fd">${plural(x.matches.length,'fellow dreamer')}</span>`:'<span class="badge off">○ OFFLINE · PRIVATE</span>'}`:`<span class="badge mute">${x.recall==='no'?'NOT REMEMBERED':'DREAMT · FORGOT'}</span>`}<span class="hint">${DOW[IPC.weekday(x.date)]}</span></span><span class="clamp">${esc(x.recall==='yes'?x.text:'No dream text for this night.')}</span></span><span class="go">›</span></button>`}).join('')||'<p class="empty">No dreams yet.</p>'}</div>`}
+function rMorning(){const d=UI.dm;
+ if(d.view==='result'){const dr=D.dreams.find(x=>x.id===d.last);if(!dr){d.view='form';return rMorning()}
+  return `<div class="card hl"><div class="st">✓ DREAM REGISTERED · ${fmtD(dr.date)}</div><p>${dr.recall==='yes'?esc(dr.summary):dr.recall==='no'?'No dream remembered.':'Dreamt but forgot.'}</p></div>
+  ${dr.online?(d.scan?`<div class="scanner"><div class="r"></div><p class="cer-t">SCANNING FELLOW DREAMERS…</p><p class="sub">Comparing your keywords and date with other dreamers.</p></div>`:`<div class="st">FELLOW DREAMERS · ${dr.matches.length}</div><div class="note">Simulated for this preview. These dreamers are not real people; live matching arrives with the app.</div>${mCards(dr.matches)||'<p class="sub">No dreamers share enough keywords with this dream right now.</p>'}`):(dr.recall==='yes'?'<p class="sub">Dream Offline: stored on this device only. It takes no part in matching.</p>':'')}
+  <div class="row"><button class="btn" data-a="dmNew">LOG ANOTHER</button><button class="btn g" data-a="dmTab" data-v="journal">OPEN JOURNAL</button></div>`}
+ const yes=d.draft.recall==='yes',len=d.draft.text.trim().length;
+ return `<div class="split"><div class="side"><div class="card"><div class="st">☾ GOOD MORNING</div><p class="sub">Log the dream as soon as you wake. Choose whether it goes online to find fellow dreamers, or stays private.</p><ol class="steps" style="margin-top:8px"><li>Did you remember it?</li><li>Mood and free text</li><li>Create a summary on the device</li><li>Online or Offline</li></ol></div></div>
+ <div class="card"><label class="lab" for="dm-date" style="margin-top:0">DREAM DATE (THE NIGHT YOU WOKE FROM)</label><input id="dm-date" type="date" max="${today()}" value="${d.draft.date}" style="max-width:220px">
+ <div class="lab">DID YOU REMEMBER YOUR DREAM? *</div><div class="chips">${[['yes','YES'],['no','NO'],['forgot','DREAMT BUT FORGOT']].map(([v,l])=>`<button class="chip" data-a="dmRecall" data-v="${v}" aria-pressed="${d.draft.recall===v}">${l}</button>`).join('')}</div>
+ ${yes?`<div class="lab">MOOD OF THE DREAM *</div><div class="chips">${IPC.MOODS.map(m=>`<button class="chip" data-a="dmMood" data-v="${m}" aria-pressed="${d.draft.mood===m}"><span class="dot" style="background:${DMC[m]}"></span>${m}</button>`).join('')}</div>
+ <label class="lab" for="dm-text">WHAT WAS THE DREAM ABOUT? WRITE FREELY *</label><textarea id="dm-text" maxlength="4000" placeholder="Places, people, feelings, what happened…">${esc(d.draft.text)}</textarea><p class="hint"><span id="dm-cnt">${len}</span> characters · minimum 30</p>
+ <div class="row"><button class="btn g" id="dm-sum" data-a="dmSum"${len>=30?'':' disabled'}>CREATE SUMMARY</button></div>
+ ${d.draft.summary?`<div class="card hl" style="margin-top:12px"><div class="st">SUMMARY · MADE ON YOUR DEVICE</div><p>${esc(d.draft.summary)}</p><div class="chips" style="margin-top:8px">${d.draft.kw.map(k=>`<span class="chip k">${esc(k.l)}</span>`).join('')}</div>
+ <div class="lab">CONNECT TO FELLOW DREAMERS?</div><div class="seg" role="group"><button data-a="dmOnline" data-v="1" aria-pressed="${d.draft.online}">DREAM ONLINE</button><button data-a="dmOnline" data-v="0" aria-pressed="${!d.draft.online}">DREAM OFFLINE</button></div>
+ <p class="hint">${d.draft.online?'Online: only the summary keywords and date are compared with other dreamers. Your full text is never shared.':'Offline: stays on this device and takes no part in matching.'}</p></div>`:''}`:''}
+ ${d.draft.recall&&(!yes||d.draft.summary)?`<div class="row"><button class="btn" data-a="dmReg">REGISTER DREAM</button></div>`:''}</div></div>`}
+function bandOf(ts){const h=new Date(ts).getHours();return h>=5&&h<12?'Mornings':h<17&&h>=12?'Afternoons':h>=17&&h<21?'Evenings':'Nights'}
+function rDV(){const d=UI.dm,last=D.dejavu.find(x=>x.id===d.dvLast),c=C(),cn=isX()?'Bengaluru':c.name;
+ const where=x=>{const g=IPC.geo(c.lat,c.lon,x.lat,x.lon);return `${g.km<.5?'under 0.5':g.km.toFixed(1)} km ${g.dir} of ${esc(cn)} centre`};
+ const n=D.dejavu.length,avg=n?(D.dejavu.reduce((a,x)=>a+x.intensity,0)/n).toFixed(1):'—',bc={};D.dejavu.forEach(x=>{const b=bandOf(x.ts);bc[b]=(bc[b]||0)+1});const band=Object.entries(bc).sort((a,b)=>b[1]-a[1])[0],m30=D.dejavu.filter(x=>Date.now()-x.ts<30*864e5).length;
+ const dots=k=>'●'.repeat(k)+'<span style="opacity:.25">'+'●'.repeat(5-k)+'</span>';
+ return `<div class="split"><div class="side"><button class="bigb" data-a="dvGo">◉ I'M HAVING DÉJÀ VU<small>TAP TO CAPTURE THIS MOMENT</small></button><p class="hint" style="margin:8px 0 12px">Time is recorded instantly. Location is added and rounded to about 100 m. In this preview the location is emulated around your Future City.</p>
+ ${last?`<div class="card hl"><div class="st">✓ CAPTURED · ${fmtT(last.ts)}</div><p class="sub small">${where(last)}</p><div class="lab">INTENSITY</div><div class="chips">${[1,2,3,4,5].map(k=>`<button class="chip" data-a="dvInt" data-v="${k}" aria-pressed="${last.intensity===k}">${k}</button>`).join('')}</div><label class="lab" for="dv-note">WHAT FELT FAMILIAR? (OPTIONAL)</label><textarea id="dv-note" style="min-height:80px" maxlength="500">${esc(last.note)}</textarea></div>`:''}</div>
+ <div><div class="kpis"><div class="kpi"><span>CAPTURES</span><b>${n}</b><small>all time</small></div><div class="kpi"><span>LAST 30 DAYS</span><b>${m30}</b><small>moments</small></div><div class="kpi"><span>AVG INTENSITY</span><b>${avg}<small>/5</small></b><small>how strong it felt</small></div><div class="kpi"><span>MOST OFTEN</span><b style="font-size:1.1rem">${band?band[0].toUpperCase():'—'}</b><small>${band?plural(band[1],'capture'):'no pattern yet'}</small></div></div>
+ ${D.dejavu.map(x=>`<div class="dv"><div class="t"><b>${fmtDS(IPC.isoOf(x.ts))}</b><small>${hm(new Date(x.ts))} · ${DOW[new Date(x.ts).getDay()]}</small></div><div><div class="ints">${dots(x.intensity)}</div><div class="sub small">📍 ${where(x)}</div><div style="margin-top:3px">${esc(x.note||'—')}</div></div><div>${d.del===x.id?`<button class="btn d sm" data-a="dvDelYes" data-id="${x.id}">DELETE</button> <button class="btn g sm" data-a="dmDelNo">KEEP</button>`:`<button class="btn g sm" data-a="dvDel" data-id="${x.id}" aria-label="Delete capture">✕</button>`}</div></div>`).join('')||'<p class="empty">No déjà vu captured yet.</p>'}</div></div>`}
+
+/* ---------- ASTROLOGY ---------- */
+function astroActs(t){const mo=IPC.moonEvents(t,60),fm=mo.find(x=>x.name==='Full moon'),out=[];
+ if(fm)out.push({id:'fm:'+fm.d,t:'Full-moon meditation walk',d:fm.d,time:'7:00 PM',p:'A slow, guided walk and a 20-minute sitting under the full moon. Phones away.',tag:'MEMBERS'});
+ for(const nm of mo.filter(x=>x.name==='New moon')){const w=IPC.weekday(nm.d),sat=IPC.addDays(nm.d,w===0?-1:6-w);if(sat>=t){out.push({id:'sg:'+sat,t:'Dark-sky stargazing night',d:sat,time:'9:00 PM',p:'Telescope session on the darkest weekend of the month, near the new moon. Find your sign’s constellation.',tag:'MEMBERS'});break}}
+ const sun=IPC.nextWeekday(IPC.addDays(t,1),0);out.push({id:'pl:'+sun,t:'Planetarium visit',d:sun,time:'11:00 AM',p:'Group visit to the city planetarium show, followed by tea and questions.',tag:'OPEN'});
+ const bc=IPC.nextNthWeekday(IPC.addDays(t,1),0,2);out.push({id:'bc:'+bc,t:'Birth-chart basics workshop',d:bc===sun?IPC.addDays(bc,7):bc,time:'4:00 PM',p:'What a full natal chart needs (birth time, place, ephemeris) and how to read your own, with a practitioner.',tag:'MEMBERS'});
+ return out.sort((a,b)=>a.d.localeCompare(b.d))}
+function rAS(){const t=today(),dob=D.profile.dob,s=IPC.signFor(dob),doy=IPC.daysBetween(t.slice(0,4)+'-01-01',t),mn=IPC.moonNow(Date.now()),mo=IPC.moonEvents(t,30),G={'New moon':'🌑','First quarter':'🌓','Full moon':'🌕','Last quarter':'🌗'},acts=astroActs(t);
+ return `<div class="split"><div class="side"><div class="card hl"><div class="sign"><span class="gl">${s.g}</span><div><div class="st" style="margin:0">${s.n.toUpperCase()}</div><p class="sub small">Sun in ${s.n} · ${s.rg}</p><p class="hint">Born ${fmtD(dob)}</p></div></div>${s.cusp?`<p class="note">Your birth date sits on the edge of a sign. Boundaries shift by a few hours each year, so only your birth time, place and an ephemeris can confirm it.</p>`:''}</div>
+ <div class="card"><div class="st">MOON TODAY</div><div class="mn"><span>${mn.ill>.97?'🌕':mn.ill<.03?'🌑':mn.age<14.77?'🌓':'🌗'}</span><span><b>${mn.name}</b><small>${Math.round(mn.ill*100)}% illuminated · day ${Math.floor(mn.age)+1} of the cycle</small></span></div>
+ <div class="st" style="margin-top:14px">MOON CALENDAR · NEXT 30 DAYS</div>${mo.map(x=>`<div class="mn"><span>${G[x.name]}</span><span><b>${x.name}</b><small>${fmtDW(x.d)} (approx.)</small></span></div>`).join('')}</div></div>
+ <div><div class="gr2"><div class="card"><div class="st">REFERENCE (FACTUAL)</div>${[['Sign',s.n],['Date range',s.rg],['Element',s.el],['Modality',s.mo],['Traditional ruler',s.ru]].map(([k,v])=>`<div class="kv"><span>${k}</span><b>${v}</b></div>`).join('')}<p class="hint" style="margin-top:8px">These are conventions of Western astrology, not scientific measurements.</p></div>
+ <div class="card"><div class="st">INTERPRETATION (ASTROLOGICAL)</div><p class="sub small">Traits associated with ${s.n}:</p><div class="chips" style="margin:6px 0 10px">${s.tr.map(x=>`<span class="chip k">${x}</span>`).join('')}</div><p class="sub small">Reflection themes:</p>${s.th.map(x=>`<p style="margin-top:4px">› ${x}</p>`).join('')}</div></div>
+ <div class="card"><div class="st">SMALL ACTIONS FOR YOU</div>${s.ac.map((a,i)=>`<div class="kv"${i===doy%3?' style="color:var(--act)"':''}><span style="color:inherit">${i===doy%3?'★ TODAY':'•'}</span><b style="font-weight:600">${a}</b></div>`).join('')}</div>
+ <div class="st" style="margin-top:6px">ASTRO ACTIVITIES YOU CAN ATTEND · ${esc(place().toUpperCase())}</div>
+ <div class="evg">${acts.map(a=>{const k='astro:'+a.id,on=!!D.rsvp[k];return `<div class="ev"><span class="when">${fmtDW(a.d).toUpperCase()} · ${a.time}</span><b>${esc(a.t)}</b><p>${esc(a.p)}</p><div class="m"><span class="badge">${a.tag}</span><button class="chip" data-a="rsvp" data-v="${k}" aria-pressed="${on}">${on?'✓ I’M IN':'I’M IN'}</button></div></div>`}).join('')}</div>
+ <div class="discl"><b>Please note.</b> Astrology is not scientifically validated and is offered for reflection and entertainment. This is a Sun-sign reference from your birth date only; Moon, rising sign and planetary placements need your birth time, birthplace and an ephemeris and are not calculated here. Moon-phase dates are calculated from the average lunar cycle and can be off by up to a day.</div></div></div>`}
+
+/* ---------- EVENTS ---------- */
+function rEV(){const t=today(),pp=P(),mp=pickNow(),mname=MONL[+mp.ym.slice(5)-1],pickD=mp.pick,locked=pickD&&pickD.d<t;
+ const open=[{id:'o1',t:'Nomad Networking Night',d:IPC.nextLastWeekday(t,5),time:'7:00 PM',p:'No agenda, just conversations that move ideas forward.'},{id:'o2',t:'Silent Co-Working Morning',d:IPC.nextWeekday(t,6),time:'9 AM – 1 PM',p:'Shared focus in a distraction-minimal room.'},{id:'o3',t:'Idea Dump Workshop',d:IPC.nextNthWeekday(t,3,1),time:'6:30 PM',p:'Bring half-baked ideas. Leave with structure and a plan.'}];
+ const P0=IPC.parseISO(t),mon=k=>{let m=P0.m+k,y=P0.y;while(m>12){m-=12;y++}return MON[m-1]+' '+y};
+ const col=[['V','Wealth & Investment Summit','Frameworks for building generational wealth.'],['I','Tech Innovation Hackathon','48 hours of building real solutions.'],['B','Brand Trust Workshop','Brands customers trust, buy from and love.'],['G','Green Revolution Meetup','Sustainable living and eco-conscious business.'],['Y','Young Leaders Forum','Networking for entrepreneurs aged 18 to 23.'],['R','Real Estate Power Meet','Property investment and market cycles.'],['O','Wisdom & Culture Festival','A day of craft, music and the stories behind them.']];
+ const card=(e,c,k,extra='')=>{const on=!!D.rsvp[k];return `<div class="ev" style="--c:${c}"><span class="when">${e.when}</span><b>${esc(e.t)}</b><p>${esc(e.p)}</p><div class="m">${extra}<button class="chip" data-a="rsvp" data-v="${k}" aria-pressed="${on}">${on?'✓ INTERESTED':'I’M INTERESTED'}</button></div></div>`};
+ return `<div class="card hl"><div class="yours"><div><div class="st" style="margin:0">YOUR INCLUDED EVENT · ${mname.toUpperCase()}</div><p class="sub small">Your ₹1,001 membership includes one IPNOTEC-organised event every month. Pick one${isX()?'':' in '+esc(C().name)}.</p></div>${pickD?`<span class="badge on">✓ ${esc(pickD.t.toUpperCase())} · ${fmtDS(pickD.d).toUpperCase()}</span>`:'<span class="badge">CHOOSE 1</span>'}</div>
+ <div class="evg" style="margin:12px 0 4px">${mp.opts.map(o=>{const sel=pickD&&pickD.id===o.id;return `<button class="ev pick" data-a="pick" data-v="${o.id}" aria-pressed="${!!sel}"${locked&&!sel?' disabled style="opacity:.45"':''}><span class="when">${fmtDW(o.d).toUpperCase()} · ${o.time}</span><b>${esc(o.t)}</b><p>${esc(o.desc)}</p><span class="m"><span>📍 ${esc(place())}</span>${o.yours?`<span class="badge">YOUR COLOUR · ${esc(pp.n)}</span>`:''}<span class="badge${sel?' on':''}">${sel?'✓ YOUR PICK':'INCLUDED'}</span></span></button>`}).join('')}</div>
+ <p class="hint">${locked?'This month’s pick has taken place. Next month’s options open on the 1st.':'You can switch your pick until the day of the event. Final confirmation and venue come from IPNOTEC.'}</p></div>
+ <div class="sec">OPEN · NOMAD EVENTS</div><div class="evg">${open.map(o=>card({...o,when:fmtDW(o.d).toUpperCase()+' · '+o.time},'#9B9B9B','open:'+o.id,'<span class="badge mute">OPEN</span>')).join('')}</div>
+ <div class="sec">VIBGYOR COMMUNITY · COMING MONTHS</div><div class="evg">${col.map((c,i)=>{const pc=IPC.PERSONAS[c[0]];return card({t:c[1],p:c[2],when:mon(i+1).toUpperCase()},pc.t,'col:'+c[0]+':'+mon(i+1),c[0]===D.prefix?`<span class="badge">YOUR COLOUR</span>`:`<span class="badge" style="--c:${pc.t}">IP${c[0]}</span>`)}).join('')}</div>
+ <div class="sec">FOUNDING MEMBERS · START THE REVOLUTION (₹10,001)</div><div class="evg"><div class="ev" style="--c:#fff"><span class="when">21 DEC 2026</span><b>IPNOTEC Annual Gala 2026</b><p>The flagship celebration of VIBGYOR members and the year ahead.</p><div class="m"><span class="badge mute">FOUNDING ONLY</span></div></div><div class="ev" style="--c:#fff"><span class="when">MONTHLY · BY INVITATION</span><b>Founders' Roundtable</b><p>Closed-door strategy and accountability with founding members.</p><div class="m"><span class="badge mute">FOUNDING ONLY</span></div></div></div>
+ <p class="hint">Interest is saved on this device. Final confirmation comes from IPNOTEC.</p>`}
+
+/* ---------- PROFILE ---------- */
+function rPF(){const p=D.profile,pp=P(),c=C(),sg=IPC.signFor(p.dob),age=IPC.ageOn(p.dob,today()),B=benefits();
+ return `<div class="split"><div class="side"><div class="idcard"><div class="tp">IPNOTEC · VIP MEMBER</div><div class="iid">${esc(D.id)}</div><div class="inm">${esc(p.name)}</div>
+ <div class="ir"><span>PERSONA<b>${esc(pp.n)}</b></span><span style="text-align:right">FUTURE CITY<b>${isX()?'NOT CHOSEN':esc(p.cityTyped)}</b></span></div>
+ <div class="ir"><span>MEMBER SINCE<b>${fmtD(p.since)}</b></span><span style="text-align:right">RENEWS<b>${fmtD(renewal())}</b></span></div>
+ <span class="tier">JOIN THE REVOLUTION · ₹1,001/MO</span></div>
+ <div class="card" style="margin-top:14px"><div class="st">SUPPORT</div><p class="sub small">Write to <b style="color:#fff">ping@ipnotec.vip</b> from your member address. Only active member aliases are accepted.</p></div></div>
+ <div><div class="card"><div class="st">PROFILE</div>
+ <div class="kv"><span>Name</span><b>${esc(p.name)}</b></div>
+ <div class="kv"><span>IPNOTEC ID</span><b>${esc(D.id)}</b></div>
+ <div class="kv"><span>Phone</span><b>${esc(p.phone)}</b></div>
+ <div class="kv"><span>Intranet email (spam-free)</span><b>${esc(p.email)}</b></div>
+ <div class="kv"><span>Persona</span><b><span class="sw" style="background:${pp.sw};vertical-align:-2px"></span> IP${D.prefix} · ${esc(pp.n)} · ${esc(pp.m)}</b></div>
+ <div class="kv"><span>Future City</span><b>${esc(cityLine())}</b></div>
+ ${isX()?'':`<div class="kv"><span>Country code · currency</span><b>+${c.dial} · ${esc(c.cur)}</b></div>`}
+ <div class="kv"><span>Date of birth</span><b>${fmtD(p.dob)} · ${age} yrs · ${sg.g} ${esc(sg.n)}</b></div>
+ <div class="kv"><span>Address Book reveal</span><b>${fmtDW(D.lock.unlockOn)}</b></div>
+ ${isX()?'<p class="note">IPX members see the PC in black and white. Choosing a persona colour and Future City turns your ID, events and PC into colour.</p>':''}</div>
+ <div class="card"><div class="st">WHAT ₹1,001 / MONTH INCLUDES · THIS MONTH</div><div class="bl6">${B.map(b=>`<button class="bn${b.done?' ok':''}" data-a="open" data-app="${b.app}"><span>${b.done?'✓':'○'}</span><span style="color:inherit;font-weight:500;font-size:1rem"><b>${esc(b.t)}</b><small>${esc(b.d)}</small></span></button>`).join('')}</div>
+ <p class="hint" style="margin-top:10px">Plus: Astrology reference and moon calendar · Déjà vu capture · IPNOTEC Virtual PC on web and app.</p></div>
+ <div class="card"><div class="st">YOUR DATA</div><p class="sub small">Everything in this preview lives in this browser. Nothing is uploaded.${persistOK?'':' <b style="color:var(--bad)">Storage is unavailable here, so data lasts for this session only.</b>'}</p>
+ <div class="row"><button class="btn g" data-a="export">⬇ EXPORT MY DATA (JSON)</button><button class="btn g" data-a="selftest">RUN SELF-TEST</button><button class="btn g" data-a="signout">⏻ SIGN OUT</button></div>
+ ${UI.pf.tests?`<p class="sub small" style="margin-top:8px;color:${UI.pf.tests.fail?'var(--bad)':'var(--good)'}">${UI.pf.tests.pass}/${UI.pf.tests.total} checks passed${UI.pf.tests.fail?': '+esc(UI.pf.tests.names):''}</p>`:''}
+ <div class="row">${UI.pf.reset?`<span class="sub small">Replace this member with a new random profile for ${esc(D.id)}?</span><button class="btn d" data-a="resetDo">YES, GENERATE NEW</button><button class="btn g" data-a="resetNo">CANCEL</button>`:`<button class="btn d" data-a="resetAsk">↻ NEW RANDOM MEMBER FOR THIS ID</button>`}</div></div></div></div>`}
+
+/* ---------- actions ---------- */
+const val=id=>document.getElementById(id)?.value??'';
+const ACT={
+ verify(){verify()},
+ demo(d){L.val=d.v;L.err='';rLogin();const i=$('#idin');i.focus();try{i.setSelectionRange(i.value.length,i.value.length)}catch(e){}},
+ resume(d){L.val=d.v;L.err='';startAuth(IPC.parseID(d.v))},
+ skipAuth(){enterDesk()},
+ signout(){if(D)save();clearTM();resetUI();$('#win').hidden=true;L.val='';L.err='';showLogin()},
+ open(d){clearTM();UI.opener=document.activeElement;UI.app=d.app;UI.focusT=true;UI.msg='';
+  if(d.app==='ab'){UI.ab.view='main'}if(d.app==='ci'){UI.ci.init=0;UI.ci.del=null}if(d.app==='dm'){UI.dm.view='form';UI.dm.open=null;UI.dm.del=null;UI.dm.tab=d.tab||'journal'}if(d.app==='pf'){UI.pf.reset=false}render()},
+ close(){clearTM();UI.app=null;UI.cer=null;UI.ab.view='main';render();rDesk();if(UI.opener&&document.body.contains(UI.opener))UI.opener.focus()},
+ abFilter(d){UI.ab.filter=d.v;render()},
+ cerReal(){startCer('real')},cerPrev(){startCer('preview')},cerAgain(){startCer('preview')},
+ cerSkip(){clearTM();const c=UI.cer;c.stage='reveal';c.static=true;render()},cerReplay(){playCer()},cerClose(){clearTM();UI.cer=null;UI.ab.view='main';render()},
+ ciRange(d){UI.ci.range=+d.v;UI.ci.del=null;render()},
+ ciReason(d){UI.ci.reason=UI.ci.reason===d.v?'':d.v;render()},ciMood(d){UI.ci.mood=d.v;render()},
+ ciSave(){const raw=val('ci-amt'),amt=raw===''?'':Number(raw),x={amt,reason:UI.ci.reason,mood:UI.ci.mood},err=IPC.validateCheckin(x);if(err)return flash(err);
+  const e={id:IPC.uid(),date:today(),amt:Math.round(amt*100)/100,reason:amt>0?x.reason:'',detail:amt>0?val('ci-detail').trim():'',mood:x.mood,note:val('ci-note').trim(),ts:Date.now()},i=D.checkins.findIndex(c=>c.date===e.date);
+  if(i>=0){e.id=D.checkins[i].id;D.checkins[i]=e}else D.checkins.push(e);UI.ci.init=0;save();flash('Saved. Your dashboard is updated.');render()},
+ ciDel(d){UI.ci.del=d.id;render()},ciDelNo(){UI.ci.del=null;render()},ciDelYes(d){D.checkins=D.checkins.filter(c=>c.id!==d.id);UI.ci.del=null;UI.ci.init=0;save();flash('Entry deleted.');render()},
+ dmTab(d){clearTM();UI.dm.tab=d.v;UI.dm.open=null;UI.dm.del=null;if(d.v==='morning'&&UI.dm.view==='result')UI.dm.view='result';render()},
+ dmRecall(d){const r=UI.dm.draft;r.recall=d.v;if(d.v!=='yes'){r.summary='';r.kw=null}render()},dmMood(d){UI.dm.draft.mood=d.v;render()},
+ dmSum(){const dr=UI.dm.draft;dr.kw=IPC.keywords(dr.text);dr.summary=IPC.summarize(dr.text);if(dr.kw.length<2)flash('Tip: add more detail so fellow dreamers can be matched.');render()},
+ dmOnline(d){UI.dm.draft.online=d.v==='1';render()},
+ dmReg(){const dr=UI.dm.draft,err=IPC.validateDream(dr,today());if(err)return flash(err);const yes=dr.recall==='yes',x={id:IPC.uid(),date:dr.date,ts:Date.now(),recall:dr.recall,mood:yes?dr.mood:'',text:yes?dr.text.trim():'',summary:yes?dr.summary:'',keywords:yes?dr.kw:[],online:yes&&dr.online,scans:0,matches:[]};
+  if(x.online)x.matches=IPC.scanDream(x,0);D.dreams.unshift(x);save();UI.dm.last=x.id;UI.dm.view='result';UI.dm.draft=newDraft();UI.dm.scan=x.online&&!RM();flash('Dream registered.');render();if(UI.dm.scan)later(()=>{UI.dm.scan=false;render()},1700)},
+ dmNew(){UI.dm.view='form';UI.dm.draft=newDraft();render()},
+ dmOpen(d){UI.dm.open=d.id;UI.dm.del=null;render();$('.wbody').scrollTop=0},dmBack(){UI.dm.open=null;UI.dm.del=null;render()},
+ dmVis(d){const x=D.dreams.find(z=>z.id===d.id);x.online=d.v==='1';x.matches=x.online?IPC.scanDream(x,x.scans||0):[];save();flash(x.online?`Online · ${plural(x.matches.length,'fellow dreamer')} connected.`:'Offline · this dream is private.');render()},
+ dmRescan(d){const x=D.dreams.find(z=>z.id===d.id);x.scans=(x.scans||0)+1;x.matches=IPC.scanDream(x,x.scans);save();flash(`Re-scanned · ${plural(x.matches.length,'fellow dreamer')}.`);render()},
+ dmDel(d){UI.dm.del=d.id;render()},dmDelNo(){UI.dm.del=null;render()},dmDelYes(d){D.dreams=D.dreams.filter(z=>z.id!==d.id);UI.dm.open=null;UI.dm.del=null;save();flash('Dream deleted.');render()},
+ dvGo(){const g=IPC.jitter(Math.random,C(),.2,6),e={id:IPC.uid(),ts:Date.now(),lat:g.lat,lon:g.lon,loc:'ok',note:'',intensity:3};D.dejavu.unshift(e);UI.dm.dvLast=e.id;save();flash('Déjà vu captured at '+hm(new Date(e.ts))+'.');render();$('#dv-note')?.focus()},
+ dvInt(d){const e=D.dejavu.find(x=>x.id===UI.dm.dvLast);if(e){e.intensity=+d.v;save();render()}},
+ dvDel(d){UI.dm.del=d.id;render()},dvDelYes(d){D.dejavu=D.dejavu.filter(x=>x.id!==d.id);if(UI.dm.dvLast===d.id)UI.dm.dvLast=null;UI.dm.del=null;save();render()},
+ rsvp(d){if(D.rsvp[d.v])delete D.rsvp[d.v];else D.rsvp[d.v]=Date.now();save();render()},
+ pick(d){const mp=pickNow(),o=mp.opts.find(x=>x.id===d.v);if(!o)return;if(mp.pick&&mp.pick.d<today())return flash('This month’s event has already taken place.');
+  if(D.pick&&D.pick.ym===mp.ym&&D.pick.id===o.id){D.pick=null;flash('Pick cleared. Choose another event.')}else{D.pick={ym:mp.ym,id:o.id,t:o.t,d:o.d};flash(`Booked: ${o.t} · ${fmtDW(o.d)}.`)}save();render()},
+ export(){const b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='ipnotec-'+D.id.toLowerCase()+'-'+today()+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),500);flash('Data exported.')},
+ selftest(){const r=IPC.tests(),f=r.filter(x=>!x.ok);UI.pf.tests={pass:r.length-f.length,total:r.length,fail:f.length,names:f.map(x=>x.name).join('; ')};render()},
+ resetAsk(){UI.pf.reset=true;render()},resetNo(){UI.pf.reset=false;render()},
+ resetDo(){D=IPC.genMember(IPC.parseID(D.id),(Math.random()*4294967296)>>>0,today());save();const a=UI.app;resetUI();UI.app=a;NF=null;flash('New random member generated for '+D.id+'.');render();rDesk()}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&!b.disabled&&ACT[b.dataset.a])ACT[b.dataset.a]({...b.dataset},e)});
+document.addEventListener('input',e=>{const el=e.target,i=el.id;
+ if(i==='idin'){const pos=el.selectionStart,v=el.value.toUpperCase().replace(/\s/g,'');if(v!==el.value){el.value=v;try{el.setSelectionRange(pos,pos)}catch(x){}}L.val=v;if(L.err){L.err='';$('#lerr').textContent='';el.classList.remove('bad')}$('#segs').innerHTML=segHTML(v)}
+ else if(i==='dm-text'){const d=UI.dm.draft;d.text=el.value;if(d.summary){d.summary='';d.kw=null;render()}else{const c=$('#dm-cnt');if(c)c.textContent=d.text.trim().length;const s=$('#dm-sum');if(s)s.disabled=d.text.trim().length<30}}
+ else if(i==='dm-date')UI.dm.draft.date=el.value;
+ else if(i==='ci-amt'||i==='ci-detail'||i==='ci-note')UI.ci[i.slice(3)]=el.value;
+ else if(i==='ab-q'){UI.ab.q=el.value;render()}
+ else if(i==='dv-note'){const x=D.dejavu.find(z=>z.id===UI.dm.dvLast);if(x){x.note=el.value;save()}}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='idin'){e.preventDefault();verify();return}
+ if(e.key==='Escape'&&D&&UI.app){if(UI.app==='ab'&&UI.ab.view==='cer')ACT.cerClose();else if(UI.app==='dm'&&UI.dm.open)ACT.dmBack();else ACT.close()}});
+/* live countdown + day rollover */
+let lastDay=today();
+setInterval(()=>{const c=$('#cd');if(c&&D)c.textContent=cdText();if(!D)return;const t=today();
+ if(t!==lastDay){lastDay=t;migrate(D);save();if(UI.app)render();else rDesk();return}
+ if(UI.app==='ab'&&UI.ab.view==='main'&&UI.ab.st&&UI.ab.st!==IPC.lockState(D.lock,t))render()},1000);
+boot();
+if(location.search.includes('test'))console.table(IPC.tests());
+})();
+</script>
+</body>
+</html>
